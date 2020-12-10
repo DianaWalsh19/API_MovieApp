@@ -1,0 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package com.mycompany.mymovieapp.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MoviesOnDemand {
+    List<Movie> allMovies = new ArrayList<>();
+    List<Movie> allCustomers = new ArrayList<>();
+}
