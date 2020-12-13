@@ -17,9 +17,6 @@ public class AccountService {
 
     public static List movieList = new ArrayList<>();
     
-
-    
-
     
     public String addMovie(){
         //add movie to movieList by ID
@@ -27,13 +24,21 @@ public class AccountService {
         return "Movie successfully added";
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     }
-    
-    
+       
     public String removeMovie(){
         //add movie to movieList by ID
         return "Movie successfully added";
         //Response: Code 200 / 404 ‘Movie successfully removed’
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
+    }
+    
+    public List<movieList> getAllMovies(){
+        //Movie m1 = new Movie(001, "Jurassic Park", 1900, false, true, "Movie about dinasaurs killing people", false);
+        return list;
+    }
+    
+    public Movie getOneMovie(int id){
+        return list.get(id);
     }
     
     public String transferMovie(){
@@ -47,4 +52,17 @@ public class AccountService {
         return "transferred successfully";
         //Response: Code 200 / 404 ‘Movie successfully removed’
     }
+    
+    //EXAMPLE OF FILTERING
+    /*public List<Message> getSearchMessages(String message, String author) {
+        List<Message> matcheslist = new ArrayList<>();
+        
+        for (Message q: getAllMessages()) {
+            if ((message == null || q.getMessage().equals(message)) 
+                   && (author == null || q.getAuthor().equals(author))) {
+               matcheslist.add(q);
+            }
+        }
+        return matcheslist;
+*/
 }

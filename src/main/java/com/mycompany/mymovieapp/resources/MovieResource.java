@@ -15,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 
 @Path ("/movie")
 @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
@@ -26,14 +27,20 @@ public class MovieResource {
 
     
     @GET
-    @Path("/(movieID)")
+    @Path("/{movieID}")
     public Movie getMovie(@PathParam("movieID") int id){
         return movieService.getOneMovie(id);
     }
+//**API 7, EXTRA - watched and recc*********************   
+    @GET
+    // display watched Movies
+    public Movie recommended(){
+        return
+    }
     
     @GET
-    // display watched novies
-    public Movie recommeneded(){
+    // display watched Movies
+    public Movie watched(){
         return
     }
     

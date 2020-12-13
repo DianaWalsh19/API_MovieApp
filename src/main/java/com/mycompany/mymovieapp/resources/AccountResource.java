@@ -18,46 +18,83 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 
-@Path ("/customer/account")
+@Path ("/account")
 @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 public class AccountResource {
     
     AccountService accountService = new AccountService();
     
-    // 
 
-    
+//**API 2********************** 
     @POST
-    public String addMovieToAccount(){
-       //resource content: custID, movieID, accountID
+    public String addMovieToAccount(@QueryParam("custID") int custID,
+                                    @QueryParam("accountID") int accountID,
+                                    @QueryParam("movieID") int movieID){
         return accountService.addMovie();
     }
     
+    
+//**API 3********************** 
     @DELETE
-    public String removeMovieFromAccount(){
-       //resource content: custID, movieID, accountID
+    @Path ("/{custID}/{accountID}")
+    public String removeMovieFromAccount(   @PathParam("custID") int custID,
+                                            @PathParam("accountID") int accountID,
+                                            @QueryParam("movieID") int movieID){
         return accountService.removeMovie();
     }
     
+    
+//**API 4**********************     
+    @GET
+    @Path("/{custID}/account/{accountID}")
+    public List showAllMovies(  @PathParam("custID") int id,
+                                @PathParam("accountID") int accountID){
+        return accountService.getAllMovies();
+    }
+
+ //**API 5**********************  
+    @GET
+    @Path("/{custID}/account/{accountID}/movie/{movieID}")
+    public List showOneMovie(   @PathParam("custID") int id,
+                                @PathParam("accountID") int accountID,
+                                @PathParam("movieID") int movieID){
+        return accountService.getOneMovie(movieID);
+    }
+    
+ //**API 6**********************  
     @PUT
-    @Path("/{custID}/{accountID}/{movieID}")
-        public String transferMovie(@PathParam("custID") int custid, @PathParam("accountID") int accountid, @PathParam("movieID") int movieid){
-        //resource content:  new accountID
+    @Path("/{custID}/account/{accountID}/movie/{movieID}")
+        public String transferMovie(@PathParam("custID") int custID,
+                                    @PathParam("accountID") int accountID,
+                                    @PathParam("movieID") int movieID,
+                                    @QueryParam("accountID") int newAccountID){
         return accountService.transferMovie();
     }
     
-    @GET
-    @Path("/{custID}/{accountID}")
-    public movieList getMovie(@PathParam("custID") int id, @PathParam("accountID")){
-        return movieService.getAllMovies();
-    }
-    
-    //where to put watched movies list?
-    //where to out recommened list?
 
     
+
+
+    //THIS CHAINS THE ACCOUNTS RESOURCE TO THE SUBRESOURCE - MOVIES
+    //NOT SURE IF THIS IS NEEDED, NEED TO ASK NOEL
+    @Path("/{accountID}/movies")
+    public MovieResource getMoviesResource() {
+	System.out.println("Getting movies subresoruces...");
+	return new MovieResource();
+    }
     
+    
+        
+//EXAMPLE OF FILTERING
+ /*   @GET
+    public List<Message> getFilteredMessages(@QueryParam("message") String message, @QueryParam("author") String author) {
+        if ((message != null) || (author != null)) {
+                     return messageService.getSearchMessages(message, author);
+        }
+        return messageService.getAllMessages();
+}*/
 }
 

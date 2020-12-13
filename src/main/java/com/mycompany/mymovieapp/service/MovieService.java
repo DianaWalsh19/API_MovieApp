@@ -14,12 +14,16 @@ public class MovieService {
     
     public static List<Movie> list = new ArrayList<>();
     
-    public List<Movie> getAllMovies(){
-        Movie m1 = new Movie(001, "Jurassic Park", 1900, false, true, "Movie about dinasaurs killing people", false);
-        return list;
-    }
-    
-    public Movie getOneMovie(int id){
+    public List getRecommended(int id){
         return list.get(id);
     }
+        
+    public List getWatched(int id){
+        return list.get(id);
+    }
+    
+
+    
+
+    
 }
