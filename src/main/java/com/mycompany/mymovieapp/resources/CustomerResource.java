@@ -27,18 +27,18 @@ public class CustomerResource {
     CustomerService customerService = new CustomerService();
     
 //**API 1*********************
-//    @POST
-//    @Path("/{custID}")
-//    public void createAccount(@PathParam("custID") int id, @QueryParam("userName") String userName, @QueryParam("password") String password, @QueryParam("child") boolean child){
-//        //input: String userName, String password, boolean child
-//        return customerService.createAccount(userName, password, child);
-//    }
+    @POST
+    @Path("/{custID}")
+    public void createAccount(@PathParam("custID") int id, String userName, String password, boolean child){
+        //input: String userName, String password, boolean child
+        return customerService.createAccount(userName, password, child);
+    }
 
 //**API 8****EXTRA*****************
-//    @GET
-//    public List<accountList> getAccount(){
-//        return customerService.getAllAccounts();
-//    }
+    @GET
+    public List<accountList> getAccount(){
+        return customerService.getAllAccounts();
+    }
     
     
     

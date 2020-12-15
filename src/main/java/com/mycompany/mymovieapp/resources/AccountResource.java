@@ -30,40 +30,44 @@ public class AccountResource {
     
 
 //**API 2********************** 
+
     @POST
-    public String addMovieToAccount(@QueryParam("custID") int custID,
-                                    @QueryParam("accountID") int accountID,
-                                    @QueryParam("movieID") int movieID){
+    @Path ("/customer/{custid}/account/{accountid}")
+    public String addMovieToAccount(@PathParam("custID") int custID,
+                                    @PathParam("accountID") int accountID,
+                                   int movieID){
+        //Body - movie id  (as JSON fragment}
+        
         return accountService.addMovie();
     }
     
     
 //**API 3********************** 
     @DELETE
-    @Path ("/{custID}/{accountID}")
+    @Path ("/{custID}/account/{accountID}/movie/{movieID}")
     public String removeMovieFromAccount(   @PathParam("custID") int custID,
                                             @PathParam("accountID") int accountID,
-                                            @QueryParam("movieID") int movieID){
+                                            @PathParam("movieID") int movieID){
         return accountService.removeMovie();
     }
     
     
 //**API 4**********************     
-//    @GET
-//    @Path("/{custID}/account/{accountID}")
-//    public List showAllMovies(  @PathParam("custID") int id,
-//                                @PathParam("accountID") int accountID){
-//        return accountService.getAllMovies();
-//    }
+    @GET
+    @Path("/{custID}/account/{accountID}")
+    public List showAllMovies(  @PathParam("custID") int id,
+                                @PathParam("accountID") int accountID){
+        return accountService.getAllMovies();
+    }
 
  //**API 5**********************  
-//    @GET
-//    @Path("/{custID}/account/{accountID}/movie/{movieID}")
-//    public List showOneMovie(   @PathParam("custID") int id,
-//                                @PathParam("accountID") int accountID,
-//                                @PathParam("movieID") int movieID){
-//        return accountService.getOneMovie(movieID);
-//    }
+    @GET
+    @Path("/{custID}/account/{accountID}/movie/{movieID}")
+    public List showOneMovie(   @PathParam("custID") int id,
+                                @PathParam("accountID") int accountID,
+                                @PathParam("movieID") int movieID){
+        return accountService.getOneMovie(movieID);
+    }
     
  //**API 6**********************  
     @PUT
@@ -71,7 +75,7 @@ public class AccountResource {
         public String transferMovie(@PathParam("custID") int custID,
                                     @PathParam("accountID") int accountID,
                                     @PathParam("movieID") int movieID,
-                                    @QueryParam("accountID") int newAccountID){
+                                    int newAccountID){
         return accountService.transferMovie();
     }
     
