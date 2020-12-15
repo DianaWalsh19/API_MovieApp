@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
 
 @Path ("/account")
 @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
@@ -48,21 +49,21 @@ public class AccountResource {
     
     
 //**API 4**********************     
-    @GET
-    @Path("/{custID}/account/{accountID}")
-    public List showAllMovies(  @PathParam("custID") int id,
-                                @PathParam("accountID") int accountID){
-        return accountService.getAllMovies();
-    }
+//    @GET
+//    @Path("/{custID}/account/{accountID}")
+//    public List showAllMovies(  @PathParam("custID") int id,
+//                                @PathParam("accountID") int accountID){
+//        return accountService.getAllMovies();
+//    }
 
  //**API 5**********************  
-    @GET
-    @Path("/{custID}/account/{accountID}/movie/{movieID}")
-    public List showOneMovie(   @PathParam("custID") int id,
-                                @PathParam("accountID") int accountID,
-                                @PathParam("movieID") int movieID){
-        return accountService.getOneMovie(movieID);
-    }
+//    @GET
+//    @Path("/{custID}/account/{accountID}/movie/{movieID}")
+//    public List showOneMovie(   @PathParam("custID") int id,
+//                                @PathParam("accountID") int accountID,
+//                                @PathParam("movieID") int movieID){
+//        return accountService.getOneMovie(movieID);
+//    }
     
  //**API 6**********************  
     @PUT

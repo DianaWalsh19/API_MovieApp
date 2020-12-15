@@ -14,13 +14,13 @@ public class MovieService {
     
     public static List<Movie> list = new ArrayList<>();
     
-    public List getRecommended(int id){
-        return list.get(id);
-    }
-        
-    public List getWatched(int id){
-        return list.get(id);
-    }
+//    public List getRecommended(int id){
+//        return list.get(id);
+//    }
+//        
+//    public List getWatched(int id){
+//        return list.get(id);
+//    }
     
 
     

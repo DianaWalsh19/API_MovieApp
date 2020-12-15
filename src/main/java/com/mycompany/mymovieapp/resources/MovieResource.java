@@ -26,22 +26,22 @@ public class MovieResource {
     
 
     
-    @GET
-    @Path("/{movieID}")
-    public Movie getMovie(@PathParam("movieID") int id){
-        return movieService.getOneMovie(id);
-    }
+//    @GET
+//    @Path("/{movieID}")
+//    public Movie getMovie(@PathParam("movieID") int id){
+//        return movieService.getOneMovie(id);
+//    }
 //**API 7, EXTRA - watched and recc*********************   
-    @GET
-    // display watched Movies
-    public Movie recommended(){
-        return
-    }
-    
-    @GET
-    // display watched Movies
-    public Movie watched(){
-        return
-    }
-    
+//    @GET
+//    // display watched Movies
+//    public Movie recommended(){
+//        return
+//    }
+//    
+//    @GET
+//    // display watched Movies
+//    public Movie watched(){
+//        return
+//    }
+//    
 }

@@ -32,14 +32,14 @@ public class AccountService {
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     }
     
-    public List<movieList> getAllMovies(){
-        //Movie m1 = new Movie(001, "Jurassic Park", 1900, false, true, "Movie about dinasaurs killing people", false);
-        return list;
-    }
-    
-    public Movie getOneMovie(int id){
-        return list.get(id);
-    }
+//    public List<movieList> getAllMovies(){
+//        //Movie m1 = new Movie(001, "Jurassic Park", 1900, false, true, "Movie about dinasaurs killing people", false);
+//        return list;
+//    }
+//    
+//    public Movie getOneMovie(int id){
+//        return list.get(id);
+//    }
     
     public String transferMovie(){
         //removeMovie() from accountID as param
