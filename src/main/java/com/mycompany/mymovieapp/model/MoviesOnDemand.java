@@ -12,6 +12,7 @@ import com.mycompany.mymovieapp.model.Movie;
 
 public class MoviesOnDemand {
 
+
     
     public static void main(String[] args) {
     List<Movie> allMovies = new ArrayList<>();
@@ -20,6 +21,22 @@ public class MoviesOnDemand {
     allMovies.add(new Movie(2, "The Other Guys", 2010, false, false, "2010 American buddy cop action comedy film directed by Adam McKay, who co-wrote it with Chris Henchy.", false));
     allMovies.add(new Movie(3, "Jurassic Park", 1993, false, false, "1993 American science fiction adventure film directed by Steven Spielberg and produced by Kathleen Kennedy and Gerald R. Molen.", false));
     
-    List<Customer> allCustomers = new ArrayList<>();
+    List<Customer> allCustomers = new ArrayList<Customer>();
+    allCustomers.add(new Customer(1, "Peter Mark", "123 Crescent View, Dublin", "peter@petermark.com"));
+    allCustomers.add(new Customer(2, "Mary Smith", "123 New Avenue, Dublin", "mary@gmail.com"));
+    allCustomers.add(new Customer(3, "Peter D", "123 Crescent View, Dublin", "peter@petermark.com"));
+    
+    
     }
+    
+
+    
+    public List<Customer> getCustomerList(){
+        return allCustomers;
+    }
+    
+    public List<Customer> getAllAccounts(){
+        return list;
+    }
+
 }

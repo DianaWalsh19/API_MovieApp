@@ -25,7 +25,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(String userName, String password, boolean child) {
+    public Account(int accountID, String userName, String password, boolean child) {
         this.accountID = accountID; //should be auto generated, not entered into constructor
         this.userName = userName;
         this.password = password;

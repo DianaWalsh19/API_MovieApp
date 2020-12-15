@@ -31,7 +31,8 @@ public class CustomerResource {
     @Path("/{custID}")
     public void createAccount(@PathParam("custID") int id, String userName, String password, boolean child){
         //input: String userName, String password, boolean child
-        return customerService.createAccount(userName, password, child);
+        customerService.createAccount(id, userName, password, child);
+       
     }
 
 //**API 8****EXTRA*****************
