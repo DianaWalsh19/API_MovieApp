@@ -16,7 +16,7 @@ public class Movie {
     private boolean watched;
     private boolean recommended;
     private String summary;      
-    private boolean childFriendly; 
+    private static boolean childFriendly; 
 
     public Movie() {
     }
@@ -55,7 +55,7 @@ public class Movie {
         return summary;
     }
 
-    public boolean isChildFriendly() {
+    public static boolean isChildFriendly() {
         return childFriendly;
     }
 

@@ -7,21 +7,36 @@
 package com.mycompany.mymovieapp.service;
 
 import com.mycompany.mymovieapp.model.Account;
+import com.mycompany.mymovieapp.model.Movie;
+import com.mycompany.mymovieapp.model.MoviesOnDemand;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class AccountService {
     
-
-    public static List movieList = new ArrayList<>();
+    private ArrayList<Movie> movieList = new ArrayList<Movie>();
     
-    
-    public String addMovie(){
-        //add movie to movieList by ID
-        //check for child-friendly
-        return "Movie successfully added";
+    public Movie addMovie(int accountID, int movieID){
+        //This method checks first if the account is a child one. 
+        //If so, the movie must be childFriendly to be added to the list
+        boolean childAccount = false;
+        Account a = new Account();
+        a = CustomerService.getAccountByID(accountID);
+        childAccount = Account.isChild();
+        
+        boolean childFriendlyMovie = false;
+        Movie m = getOneMovie(movieID);
+        childFriendlyMovie = Movie.isChildFriendly();
+        
+        if (childAccount == true && childFriendlyMovie == false){
+            m = null;
+        }
+        else {
+            List<Movie> movieList = a.getMovieList();
+            movieList.add(m);
+        }
+        return m;
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     }
        
@@ -32,13 +47,13 @@ public class AccountService {
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     }
     
-    public List<movieList> getAllMovies(){
+    public ArrayList<Movie> getAllMovies(){
         //Movie m1 = new Movie(001, "Jurassic Park", 1900, false, true, "Movie about dinasaurs killing people", false);
-        return list;
+        return movieList;
     }
 //    
     public Movie getOneMovie(int id){
-        return list.get(id);
+        return movieList.get(id);
     }
     
     public String transferMovie(){
@@ -65,4 +80,5 @@ public class AccountService {
         }
         return matcheslist;
 */
+    
 }

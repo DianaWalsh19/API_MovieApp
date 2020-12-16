@@ -11,10 +11,10 @@ import com.mycompany.mymovieapp.model.Movie;
 
 public class MoviesOnDemand {
     
-    private ArrayList<Customer> allCustomers;
-    private ArrayList<Movie> allMovies;
+    private static ArrayList<Customer> allCustomers;
+    private static ArrayList<Movie> allMovies;
     
-    MoviesOnDemand() {
+    public MoviesOnDemand() {
 
         allMovies = new ArrayList<Movie>();
         allCustomers = new ArrayList<Customer>();
@@ -25,27 +25,26 @@ public class MoviesOnDemand {
 
         ArrayList<Customer> allCustomers = new ArrayList<Customer>();
         allCustomers.add(new Customer(1, "Peter Mark", "123 Crescent View, Dublin", "peter@petermark.com"));
-        allCustomers.add(new Customer(2, "Mary Smith", "123 New Avenue, Dublin", "mary@gmail.com"));
-        allCustomers.add(new Customer(3, "Peter D", "123 Crescent View, Dublin", "peter@petermark.com"));
+        allCustomers.add(new Customer(2, "Mary Smith", "123 New Avenue, Waterford", "mary@gmail.com"));
+        allCustomers.add(new Customer(3, "Peter D", "123 Magic Road, Kilkenny", "peter@anotherpeter.com"));
     }
 
-    public ArrayList<Customer> getCustomerList() {
-        return this.allCustomers;
+    public static ArrayList<Customer> getCustomerList() {
+        return allCustomers;
     }
 
-    public ArrayList<Movie> getAllMovies() {
-        return this.allMovies;
+    public static ArrayList<Movie> getAllMovies() {
+        return allMovies;
     }
 
-    public Customer customerByID(int custID) {
-        
+    public static Customer getCustomerByID(int custID) {
         Customer found = null;
-        
-        for (Customer c : this.allCustomers) {
+        for (Customer c : allCustomers) {
             if (c.getCustID() == custID) {
                 found = c;
             } 
         }
         return found;
     }
+    
 }

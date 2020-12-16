@@ -20,7 +20,7 @@ public class Account {
     private String userName;
     private String password;
     private List<Movie> movieList = new ArrayList<>();
-    private boolean child;
+    private static boolean child;
 
     public Account() {
     }
@@ -48,7 +48,7 @@ public class Account {
         return movieList;
     }
 
-    public boolean isChild() {
+    public static boolean isChild() {
         return child;
     }
 

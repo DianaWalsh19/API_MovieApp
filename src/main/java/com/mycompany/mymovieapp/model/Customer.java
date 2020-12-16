@@ -14,7 +14,7 @@ public class Customer {
     private String name;
     private String address;
     private String email;
-    private List<Account> accountList = new ArrayList<>();
+    private static List<Account> accountList = new ArrayList<>();
 
     public Customer(){  
     }
@@ -62,7 +62,7 @@ public class Customer {
         this.email = email;
     }
     
-    public List<Account> getAccounts(){
+    public static List<Account> getAccounts(int custID){
         return accountList;
     }
 }
