@@ -17,16 +17,17 @@ public class Account {
     
         
     private int accountID;
+    private int customID;
     private String userName;
     private String password;
-    private List<Movie> movieList = new ArrayList<>();
+    private ArrayList<Movie> movieList = new ArrayList<>();
     private static boolean child;
 
     public Account() {
     }
 
-    public Account(int accountID, String userName, String password, boolean child) {
-        this.accountID = accountID; //should be auto generated, not entered into constructor
+    public Account(int customID, String userName, String password, boolean child) {
+        this.customID = customID;
         this.userName = userName;
         this.password = password;
         this.child = child;
@@ -44,7 +45,7 @@ public class Account {
         return password;
     }
 
-    public List<Movie> getMovieList() {
+    public ArrayList<Movie> getMovieList() {
         return movieList;
     }
 
@@ -64,7 +65,7 @@ public class Account {
         this.password = password;
     }
 
-    public void setMovieList(List<Movie> movieList) {
+    public void setMovieList(ArrayList<Movie> movieList) {
         this.movieList = movieList;
     }
 

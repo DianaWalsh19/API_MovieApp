@@ -55,9 +55,11 @@ public class AccountResource {
 //**API 4**********************     
     @GET
     @Path("/{custID}/account/{accountID}")
-    public List showAllMovies(  @PathParam("custID") int id,
+    public List getMoviesInAccount(  @PathParam("custID") int id, 
+    //From Diana: I changed the name of this because getAllMovies is a method in Movies on Demand.
+    //The method in the Account Service class is 
                                 @PathParam("accountID") int accountID){
-        return accountService.getAllMovies();
+        return accountService.getMoviesInAccount();
     }
 
  //**API 5**********************  
@@ -78,10 +80,6 @@ public class AccountResource {
                                     int newAccountID){
         return accountService.transferMovie();
     }
-    
-
-    
-
 
     //THIS CHAINS THE ACCOUNTS RESOURCE TO THE SUBRESOURCE - MOVIES
     //NOT SURE IF THIS IS NEEDED, NEED TO ASK NOEL

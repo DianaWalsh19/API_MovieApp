@@ -10,6 +10,7 @@ import java.util.List;
 public class CustomerService {
     
     private ArrayList<Customer> allCustomers = MoviesOnDemand.getCustomerList();
+    private ArrayList<Account> allAccounts = MoviesOnDemand.getAccountList();
     private static int custId = 0;
     private static List<Account> accountList = Customer.getAccounts(custId);
     
@@ -39,11 +40,7 @@ public class CustomerService {
         return a;//return the instance let resources render as JSON
     }
     
-    public List<Account> getAllAccounts(){
+    public List<Account> getAllAccounts(int custID){
         return accountList;
-    }
-    
-    public Account getOneAccount(int id){
-        return accountList.get(id);
     }
 }
