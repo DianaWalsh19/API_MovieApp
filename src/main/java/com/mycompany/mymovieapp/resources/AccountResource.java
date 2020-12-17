@@ -7,6 +7,7 @@
 package com.mycompany.mymovieapp.resources;
 
 import com.mycompany.mymovieapp.model.Account;
+import com.mycompany.mymovieapp.model.Movie;
 import com.mycompany.mymovieapp.service.AccountService;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -30,60 +31,80 @@ public class AccountResource {
     
 
 //**API 2********************** 
-
+//Need Noel’s notes on passing JSON objects, do we make new class within java file?
+//I need an object to pass through to the services class and don’t have appropriate
+// one that will have the three rqd ids. Do I maybe pass 3 diff objects?
     @POST
-    @Path ("/customer/{custid}/account/{accountid}")
-    public String addMovieToAccount(@PathParam("custID") int custID,
-                                    @PathParam("accountID") int accountID,
-                                   int movieID){
+    public Movie addMovieToAccount(addMovieObject amo){
         //Body - movie id  (as JSON fragment}
         
-        return accountService.addMovie();
+        return accountService.addMovie(accountID, movieID);
     }
+
     
     
-//**API 3********************** 
+    
+////**API 3********************** 
+//POSSIBLY NEEDS TO HAVE CUSTID INCLUDED ALSO, MAY NEED TO LIVE IN ANOTHER RESOURCE??
+//ALL INFO MUST BE PASSED AS PARAMETER FOR DELETE
     @DELETE
-    @Path ("/{custID}/account/{accountID}/movie/{movieID}")
-    public String removeMovieFromAccount(   @PathParam("custID") int custID,
+    @Path ("/{accountID}/{movieID}")
+    public String removeMovieFromAccount(  
                                             @PathParam("accountID") int accountID,
                                             @PathParam("movieID") int movieID){
-        return accountService.removeMovie();
+        return accountService.removeMovie(accountID, movieID);
     }
+  
     
     
-//**API 4**********************     
+    
+    
+////**API 4**********************   
+//POSSIBLY NEEDS TO HAVE CUSTID INCLUDED ALSO
     @GET
-    @Path("/{custID}/account/{accountID}")
-    public List getMoviesInAccount(  @PathParam("custID") int id, 
+    @Path("{accountID}")
+    public List listMoviesInAccount(@PathParam("accountID") int accountID){
     //From Diana: I changed the name of this because getAllMovies is a method in Movies on Demand.
     //The method in the Account Service class is 
-                                @PathParam("accountID") int accountID){
-        return accountService.getMoviesInAccount();
+        return accountService.getMoviesInAccount(accountID);
     }
 
- //**API 5**********************  
+    
+    
+    
+    
+    
+// //**API 5**********************  
+//POSSIBLY NEEDS TO HAVE CUSTID INCLUDED ALSO
     @GET
-    @Path("/{custID}/account/{accountID}/movie/{movieID}")
-    public List showOneMovie(   @PathParam("custID") int id,
-                                @PathParam("accountID") int accountID,
+    @Path("/{accountID}/{movieID}")
+    public Movie showOneMovie( @PathParam("accountID") int accountID,
                                 @PathParam("movieID") int movieID){
-        return accountService.getOneMovie(movieID);
+        return accountService.getOneMovieInAccount(accountID, movieID);
     }
     
- //**API 6**********************  
+    
+    
+    
+    
+// //**API 6**********************  
+//POSSIBLY NEEDS TO HAVE CUSTID INCLUDED ALSO
     @PUT
-    @Path("/{custID}/account/{accountID}/movie/{movieID}")
-        public String transferMovie(@PathParam("custID") int custID,
-                                    @PathParam("accountID") int accountID,
+    @Path("/{accountID}/movie/{movieID}")
+        public String transferMovie(@PathParam("accountID") int accountID,
                                     @PathParam("movieID") int movieID,
-                                    int newAccountID){
-        return accountService.transferMovie();
+                                    Account a){
+        return accountService.transferMovie(accountID, movieID, a);
     }
 
+        
+        
+        
+        
+        
     //THIS CHAINS THE ACCOUNTS RESOURCE TO THE SUBRESOURCE - MOVIES
     //NOT SURE IF THIS IS NEEDED, NEED TO ASK NOEL
-    @Path("/{accountID}/movies")
+    @Path("/{accountID}/movie")
     public MovieResource getMoviesResource() {
 	System.out.println("Getting movies subresoruces...");
 	return new MovieResource();

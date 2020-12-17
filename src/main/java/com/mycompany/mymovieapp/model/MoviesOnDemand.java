@@ -26,9 +26,9 @@ public class MoviesOnDemand {
         allMovies.add(new Movie(3, "Jurassic Park", 1993, false, false, "1993 American science fiction adventure film directed by Steven Spielberg and produced by Kathleen Kennedy and Gerald R. Molen.", false));
 
         ArrayList<Customer> allCustomers = new ArrayList<Customer>();
-        allCustomers.add(new Customer(1, "Peter Mark", "123 Crescent View, Dublin", "peter@petermark.com"));
-        allCustomers.add(new Customer(2, "Mary Smith", "123 New Avenue, Waterford", "mary@gmail.com"));
-        allCustomers.add(new Customer(3, "Peter D", "123 Magic Road, Kilkenny", "peter@anotherpeter.com"));
+        allCustomers.add(new Customer(1, "Peter Mark", "123 Crescent View, Dublin", "peter@petermark.com", allAccounts));
+        allCustomers.add(new Customer(2, "Mary Smith", "123 New Avenue, Waterford", "mary@gmail.com",allAccounts));
+        allCustomers.add(new Customer(3, "Peter D", "123 Magic Road, Kilkenny", "peter@anotherpeter.com",allAccounts));
         
         ArrayList<Account> allAccounts = new ArrayList<Account>();
         allAccounts.add(new Account(1, "Father", "password1", false));
@@ -48,14 +48,5 @@ public class MoviesOnDemand {
         return allMovies;
     }
 
-    public static Customer getCustomerByID(int custID) {
-        Customer found = null;
-        for (Customer c : allCustomers) {
-            if (c.getCustID() == custID) {
-                found = c;
-            } 
-        }
-        return found;
-    }
     
 }

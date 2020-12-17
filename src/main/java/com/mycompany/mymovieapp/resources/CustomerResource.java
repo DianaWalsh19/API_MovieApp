@@ -8,6 +8,7 @@ package com.mycompany.mymovieapp.resources;
 import com.mycompany.mymovieapp.model.Customer;
 import com.mycompany.mymovieapp.service.CustomerService;
 import com.mycompany.mymovieapp.model.Account;
+import com.mycompany.mymovieapp.model.MoviesOnDemand;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -27,19 +28,29 @@ public class CustomerResource {
     CustomerService customerService = new CustomerService();
     
 //**API 1*********************
+    //BH: RQST IS COMING THROUGH BUT THE CUSTOMER LIST IS THROWING NULL POINTER EXCEPTION
     @POST
     @Path("/{custID}")
-    public void createAccount(@PathParam("custID") int id, String userName, String password, boolean child){
-        //input: String userName, String password, boolean child
-        customerService.createAccount(id, userName, password, child);
-       
+    public Account createAccount(@PathParam("custID") int id, Account a){
+        //Customer c = customerService.getCustomerByID(id);
+        //NEEDS TO BE ADDED TO CUSTOMER LIST HERE, not sure how yet
+        //c.setAccount(a);
+        return customerService.addAccount(a); 
     }
+// THIS ONE IS FOR TESTING THE CUSTOMER LIST
+    @GET
+    @Path("/{custID}")
+    public Customer getCustomerName(@PathParam("custID") int id) {
+        return customerService.getCustomerByID(id);
+    }
+    
 
 //**API 8****EXTRA*****************
-    @GET
-    public List<accountList> getAccount(){
-        return customerService.getAllAccounts();
-    }
+//    @GET
+//        @Path("/{custID}")
+//    public List<Account> getAccount(@PathParam("custID") int id){
+//        return customerService.getAllAccounts(id);
+//    }
     
     
     

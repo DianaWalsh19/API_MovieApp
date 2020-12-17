@@ -14,12 +14,12 @@ public class Customer {
     private String name;
     private String address;
     private String email;
-    private static List<Account> accountList = new ArrayList<>();
+    private static List<Account> accountList;
 
     public Customer(){  
     }
 
-    public Customer (int custID, String name, String address, String email){
+    public Customer (int custID, String name, String address, String email, List Account){
         this.custID = custID;
         this.name = name;
         this.address = address;
@@ -59,10 +59,10 @@ public class Customer {
     }
     
     public void setAccount(List<Account> accountList){
-        this.email = email;
+        this.accountList = accountList;
     }
     
-    public static List<Account> getAccounts(int custID){
+    public static List<Account> getAccounts(){
         return accountList;
     }
 }

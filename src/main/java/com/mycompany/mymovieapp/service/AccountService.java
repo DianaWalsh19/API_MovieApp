@@ -17,6 +17,10 @@ public class AccountService {
     
     private ArrayList<Movie> movieList = new ArrayList<Movie>();
     
+    
+//THIS LINKS TO A POST REQUEST AND NEEDS A JSON OBJECT TO BE PASSED THROUGH, IT CANNOT
+// BE USED WITH PARAMETERS AS IS, WAITING FOR NOEL'S NOTES TO LEARN HOW TO DO THIS
+    
     public Movie addMovie(int accountID, int movieID){
         boolean childAccount = false;
         Account a = new Account();
@@ -24,7 +28,7 @@ public class AccountService {
         childAccount = Account.isChild();
         
         boolean childFriendlyMovie = false;
-        Movie m = getOneMovie(accountID, movieID);
+        Movie m = getOneMovieInAccount(accountID, movieID);
         childFriendlyMovie = Movie.isChildFriendly();
         
         if (childAccount == true && childFriendlyMovie == false){
@@ -37,24 +41,44 @@ public class AccountService {
         return m;
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     }
-       
+    
+    
+    
+    
+    
+//BH:  ARE WE  GIVING ACCOUNTS UNIQUE IDS? DO METHODs INVOLVING ACCOUNTS ALSO NEED TO TAKE IN 
+    // CUSTID TO GO PATH CUSTOMER:ACCOUNT:MOVIE.  This is best practice and was discussed with 
+    // Noel but we can not do. Do you think this will be possible?
+    //the resource is currently only passing accountID and movieID but can be easily changed back
+    
     public String removeMovie(int accountID, int movieID){
-        Movie m = getOneMovie(accountID, movieID);
+        Movie m = getOneMovieInAccount(accountID, movieID);
         Account a = CustomerService.getAccountByID(accountID);
         List<Movie> movieList = a.getMovieList();
         movieList.remove(movieID);
         return "Movie successfully added";
-        //Response: Code 200 / 404 ‘Movie successfully removed’
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     }
-//    
+    
+    
+    
+    
+    
+    
+    
+// BH: THIS NEEDS TO BE LINKED TO A CUSTOMER, AS ABOVE   
     public ArrayList<Movie> getMoviesInAccount(int accountID){
         Account a = new Account();
         ArrayList<Movie> movieList = a.getMovieList();
         return movieList;
     }
     
-    public Movie getOneMovie(int accountID, int movieID){
+    
+    
+    
+    
+    
+    public Movie getOneMovieInAccount(int accountID, int movieID){
         Movie found = null;
         Account a = new Account();
         List<Movie> movieList = a.getMovieList();
@@ -65,25 +89,27 @@ public class AccountService {
         }
         return found;
     }
+   
     
-    public String transferMovie(int fromAccountID, int toAccountID, int movieID){
+    
+    
+    public String transferMovie(int fromAccountID, int movieID, Account a){
         removeMovie(fromAccountID, movieID);
-        addMovie(toAccountID, movieID);
-        return "transferred successfully";
+        //should have response if movie not on account, 404 resource not found. 
+        addMovie(a.getAccountID(), movieID);
+        // if watcched = true, change to false, m.getbyID(movieID), m.setWatched
+        //need to chnage watched boolean, Noel did indicate this was a requirement!!!
+        //need to check child friendly, but this was an 'extra'
+        return "Code 200 - transferred successfully";
+        //needs error msg 404 resource not found
         //Response: Code 200 / 404 ‘Movie successfully removed’
     }
     
-    public String markAsRecommendedMovie(int accountID, int movieID){
-        Movie m = getOneMovie(accountID, movieID);
-        m.setRecommended (true);
-        return "successfully added to recommended";
-    }
     
-    public String markAsWatchedMovie(int accountID, int movieID){
-        Movie m = getOneMovie(accountID, movieID);
-        m.setWatched (true);
-        return "successfully added to watched";
-    }
+// for Diana: markAsRecommendedMovie and markAsWatchedMovie methods have been moved to Movie Service
+    
+    
+    
     
     //EXAMPLE OF FILTERING
     /*public List<Message> getSearchMessages(String message, String author) {
