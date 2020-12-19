@@ -9,6 +9,7 @@ import com.mycompany.mymovieapp.model.Customer;
 import com.mycompany.mymovieapp.service.CustomerService;
 import com.mycompany.mymovieapp.model.Account;
 import com.mycompany.mymovieapp.model.MoviesOnDemand;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -20,14 +21,29 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 
-@Path ("/customer")
+@Path ("/customers")
 @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+
+
 public class CustomerResource {
     
     CustomerService customerService = new CustomerService();
     
-//**API 1*********************
+    // DW: TEST API TO CHECK IF CUSTOMERS ARRAYLIST IS BEING POPULATED
+    @GET
+    public ArrayList<Customer> getCustomers(){  
+        return customerService.getAllCustomers();
+    }
+    
+    // BH: THIS ONE IS FOR TESTING THE CUSTOMER LIST
+    @GET
+    @Path("/{custID}")
+    public Customer getCustomerName(@PathParam("custID") int id) {
+        return customerService.getCustomerByID(id);
+    }
+    
+    //**API 1*********************
     //BH: RQST IS COMING THROUGH BUT THE CUSTOMER LIST IS THROWING NULL POINTER EXCEPTION
     @POST
     @Path("/{custID}")
@@ -37,12 +53,7 @@ public class CustomerResource {
         //c.setAccount(a);
         return customerService.addAccount(a); 
     }
-// THIS ONE IS FOR TESTING THE CUSTOMER LIST
-    @GET
-    @Path("/{custID}")
-    public Customer getCustomerName(@PathParam("custID") int id) {
-        return customerService.getCustomerByID(id);
-    }
+
     
 
 //**API 8****EXTRA*****************

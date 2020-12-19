@@ -17,20 +17,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
-@Path ("/movie")
+@Path ("/movies")
 @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 public class MovieResource {
     
     MovieService movieService = new MovieService();
     
-
   
-////    @GET
-////    @Path("/{movieID}")
-////    public Movie getMovie(@PathParam("movieID") int id){
-////        return movieService.getOneMovie(id);
-////    }
+    @GET
+    @Path("/{movieID}")
+    public Movie getMovie(@PathParam("movieID") int id){
+        return movieService.getOneMovie(id);
+    }
     
     
 //**API 7, EXTRA - watched and recc*********************   

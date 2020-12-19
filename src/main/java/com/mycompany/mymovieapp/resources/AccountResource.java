@@ -22,7 +22,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-@Path ("/account")
+@Path ("/accounts")
 @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 public class AccountResource {
@@ -34,12 +34,12 @@ public class AccountResource {
 //Need Noel’s notes on passing JSON objects, do we make new class within java file?
 //I need an object to pass through to the services class and don’t have appropriate
 // one that will have the three rqd ids. Do I maybe pass 3 diff objects?
-    @POST
+    /*@POST
     public Movie addMovieToAccount(addMovieObject amo){
         //Body - movie id  (as JSON fragment}
         
         return accountService.addMovie(accountID, movieID);
-    }
+    }*/
 
     
     

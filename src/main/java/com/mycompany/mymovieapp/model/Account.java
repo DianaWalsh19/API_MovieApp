@@ -9,13 +9,8 @@ package com.mycompany.mymovieapp.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author djame_7bf8i53
- */
 public class Account {
     
-        
     private int accountID;
     private int customID;
     private String userName;

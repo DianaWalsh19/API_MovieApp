@@ -8,7 +8,9 @@ package com.mycompany.mymovieapp.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Customer {
     private int custID;
     private String name;
@@ -19,11 +21,12 @@ public class Customer {
     public Customer(){  
     }
 
-    public Customer (int custID, String name, String address, String email, List Account){
+    public Customer (int custID, String name, String address, String email, List accountList){
         this.custID = custID;
         this.name = name;
         this.address = address;
         this.email = email;
+        this.accountList = accountList;
     }
     
     public void setcustID(int custID){

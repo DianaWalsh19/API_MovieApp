@@ -13,7 +13,7 @@ public class Movie {
     private int movieID;
     private String movieName;
     private int releaseDate;
-    private boolean watched;
+    private static boolean watched;
     private boolean recommended;
     private String summary;      
     private static boolean childFriendly; 
@@ -71,8 +71,8 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    public void setWatched(boolean watched) {
-        this.watched = watched;
+    public static void setWatched(boolean watched) {
+        Movie.watched = watched;
     }
 
     public void setRecommended(boolean recommended) {

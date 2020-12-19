@@ -14,15 +14,12 @@ public class CustomerService {
     private static int custId = 0;
     private static List<Account> accountList = Customer.getAccounts();
     
-
-    public Account addAccount (Account a) {
-	a.setAccountID(accountList.size() + 1);
-	accountList.add(a);
-	System.out.println("201 - resource created with path: /messages/" + String.valueOf(a.getAccountID()));
-	return a;
+    
+    public ArrayList<Customer> getAllCustomers(){        
+        return allCustomers;
     }
-
-    //   *****BH: CUSTOMER LIST IS THROWING NULL POINTER EXCEPTION*********
+    
+    
     public static Customer getCustomerByID(int custID) {
     Customer found = null;
     //System.out.println("getCustomerByID test 1");
@@ -36,6 +33,7 @@ public class CustomerService {
                 if (c.getCustID() == custID) {
         //System.out.println("getCustomerByID test 4");
                     found = c;
+                    return found;
         //System.out.println("getCustomerByID test 5");
                 } 
             }
@@ -44,6 +42,16 @@ public class CustomerService {
     }
     return found;
     }
+    
+    
+    public Account addAccount (Account a) {
+	a.setAccountID(allAccounts.size() + 1);
+	accountList.add(a); //Account is added in the Customer Account list
+	allAccounts.add(a); //The list of all accounts in the app is updated
+        System.out.println("201 - resource created with path: /messages/" + String.valueOf(a.getAccountID()));
+	return a;
+    }
+    
    
     public List<Account> getAllAccounts(int custID) {
         int i = Math.toIntExact(custID);
