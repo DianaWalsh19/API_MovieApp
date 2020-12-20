@@ -12,6 +12,7 @@ import com.mycompany.mymovieapp.model.Movie;
 import com.mycompany.mymovieapp.model.MoviesOnDemand;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,20 +42,19 @@ public class AccountService {
         Set<Map.Entry<Integer, Account>> entries = allAccounts.entrySet();
     }
 
-    public ArrayList<Account> getAllAccounts(int custID){
+    public ArrayList<Account> getAllAccounts(int custID){      
+        
         ArrayList<Account> listOfCustomerAccounts = new ArrayList<>();
         Customer c = new Customer();
-        Account found = null;
         ArrayList<Account> allAccountsList = new ArrayList<>(allAccounts.values());
+        
         try{
-            for (Account a : allAccountsList) {
-                if (a.getCustID() == custID) {
-                    found = a;
+            for(int i = 0; i < allAccountsList.size(); i++){
+                Account a = allAccountsList.get(i);
+                if (a.getCustID() == custID){
                     listOfCustomerAccounts.add(a);
-                    c.setListCustomerAccounts(listOfCustomerAccounts);
-                } 
-            } listOfCustomerAccounts = c.getListCustomerAccounts();
-            return listOfCustomerAccounts;
+                }c.setListCustomerAccounts(listOfCustomerAccounts);  
+            }
         }catch(NullPointerException e){
         System.out.println("Customer list throwing NullPointerException");
         }return listOfCustomerAccounts;
