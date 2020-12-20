@@ -8,9 +8,30 @@ package com.mycompany.mymovieapp.model;
 import java.util.ArrayList;
 import java.util.List;
 import com.mycompany.mymovieapp.model.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MoviesOnDemand {
     
+    private static Map<Integer, Customer> allCustomers = new HashMap<>();
+    private static Map<Integer, Account> allAccounts = new HashMap<>();
+    private static Map<Integer, Movie> allMovies = new HashMap<>();
+    
+    public static Map<Integer, Customer> getAllCustomers(){
+        return allCustomers;
+    }
+
+    public static Map<Integer, Account> getAllAccounts(){
+        return allAccounts;
+    }
+    
+    public static Map<Integer, Movie> getAllMovies(){
+        return allMovies;
+    }
+    
+    
+    
+    /*
     private static ArrayList<Customer> allCustomers = allCustomers = new ArrayList<Customer>();;
     private static ArrayList<Movie> allMovies = allMovies = new ArrayList<Movie>();
     //allAccounts stores all accounts in the app, regardless of customer association. 
@@ -43,5 +64,5 @@ public class MoviesOnDemand {
         return allMovies;
     }
 
-    
+    */
 }

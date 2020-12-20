@@ -6,14 +6,16 @@
 package com.mycompany.mymovieapp.resources;
 
 import com.mycompany.mymovieapp.model.Customer;
-import com.mycompany.mymovieapp.service.CustomerService;
 import com.mycompany.mymovieapp.model.Account;
 import com.mycompany.mymovieapp.model.MoviesOnDemand;
+import com.mycompany.mymovieapp.service.CustomerService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -28,6 +30,47 @@ import javax.ws.rs.QueryParam;
 
 public class CustomerResource {
     
+    CustomerService customerService = new CustomerService();
+     
+     
+    @GET
+    public List<Customer> getAllCustomers(){
+        return customerService.getAllCustomers();
+    }
+
+    @GET
+    @Path( "/{custID}" )
+    public Customer getCustomerByID( @PathParam("custID") int custID){
+        return customerService.getCustomerByID(custID);
+    }
+
+    @POST
+    public Customer addCustomer(Customer c){
+        return customerService.addCustomer(c);
+    }
+
+    @PUT
+    @Path( "/{custID}" )
+    public Customer updateCustomer( @PathParam("custID") int custID, Customer c ){
+        c.setcustID(custID);
+        return customerService.updateCustomer(c);
+    }
+
+    @DELETE
+    @Path( "/{custID}" )
+    public void deleteCustomer( @PathParam("custID") int custID){
+        customerService.removeCustomer(custID);
+    }
+    
+    //This is a sub-resource declaration.
+    //It tells the system that whenever the path matches the one below ("/{custID}/accounts"),
+    //the AccountResource is handed over the responsability to execute
+    @Path("/{custID}/accounts")
+    public AccountResource getAccountResource(){
+        return new AccountResource();
+    }
+    
+    /*
     CustomerService customerService = new CustomerService();
     
     // DW: TEST API TO CHECK IF CUSTOMERS ARRAYLIST IS BEING POPULATED
@@ -78,5 +121,5 @@ public class CustomerResource {
     public AccountResource getAccountsResource() {
 	System.out.println("Getting accounts subresoruces...");
 	return new AccountResource();
-    }
+    }*/
 }

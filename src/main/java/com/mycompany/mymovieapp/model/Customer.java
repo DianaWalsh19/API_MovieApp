@@ -7,7 +7,9 @@
 package com.mycompany.mymovieapp.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -16,17 +18,26 @@ public class Customer {
     private String name;
     private String address;
     private String email;
-    private static List<Account> accountList;
+    private Map<Integer, Account> customerAccounts = new HashMap<>();
+    ArrayList<Account> listOfAllAccounts = new ArrayList<>(customerAccounts.values());
 
     public Customer(){  
     }
 
-    public Customer (int custID, String name, String address, String email, List accountList){
-        this.custID = custID;
+    /*public Customer (String name, String address, String email, List accountList){
+        //this.custID = custID;
         this.name = name;
         this.address = address;
         this.email = email;
         this.accountList = accountList;
+    }*/
+    
+    public Customer (int custID, String name, String address, String email){
+        this.custID = custID;
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        //this.accountList = accountList;
     }
     
     public void setcustID(int custID){
@@ -61,12 +72,20 @@ public class Customer {
         return email;
     }
     
-    public void setAccount(List<Account> accountList){
-        this.accountList = accountList;
+    public Map<Integer, Account> getCustomerAccounts(){
+        return customerAccounts;
     }
     
-    public static List<Account> getAccounts(){
-        return accountList;
+    public ArrayList<Account> getListCustomerAccounts(){
+        return listOfAllAccounts;
+    }
+    
+    public void setCustomerAccounts(Map<Integer, Account> customerAccounts){
+        this.customerAccounts = customerAccounts;
+    }
+    
+    public void setListCustomerAccounts(ArrayList<Account> listOfCustomerAccounts){
+        this.listOfAllAccounts = listOfAllAccounts;
     }
 }
 
