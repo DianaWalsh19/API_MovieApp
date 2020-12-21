@@ -72,6 +72,10 @@ public class Account {
     public void setAccountID(int accountID) {
         this.accountID = accountID;
     }
+    
+    public void setCustID(int custID) {
+        this.custID = custID;
+    }
 
     public void setUserName(String userName) {
         this.userName = userName;

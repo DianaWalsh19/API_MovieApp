@@ -61,14 +61,23 @@ public class AccountService {
     
     public Account getAccountByID(int custID, int accountID){
         ArrayList<Account> listOfCustomerAccounts = getCustomerAccounts(custID);
-        return listOfCustomerAccounts.get(accountID-1);
+        ArrayList<Account> allAccountsList = new ArrayList<>(allAccounts.values());
+        Account a = allAccountsList.get(accountID - 1);
+        if(a.getCustID() != custID){
+            a = null;
+        }
+        return a;
     }
     
     public Account addAccount(int custID, Account a){
-        Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
-        a.setAccountID(customerAccounts.size()+1);
-        customerAccounts.put(a.getAccountID(), a);
+        //Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
+        a.setAccountID(allAccounts.size()+1);
+        a.setCustID(custID);
+        //customerAccounts.put(a.getAccountID(), a);
         allAccounts.put(a.getAccountID(), a);
+        /*for(int i =0; i < allAccounts.size(); i++){
+            System.out.println("This is the list of accounts: "+allAccounts.get(i).getAccountID() + "\n" + allAccounts.get(i).getUserName() + "\n");
+        }*/
         return a;        
     }
 
@@ -94,77 +103,6 @@ public class AccountService {
     
     /*
     private ArrayList<Movie> movieList = new ArrayList<Movie>();
-    
-    
-//THIS LINKS TO A POST REQUEST AND NEEDS A JSON OBJECT TO BE PASSED THROUGH, IT CANNOT
-// BE USED WITH PARAMETERS AS IS, WAITING FOR NOEL'S NOTES TO LEARN HOW TO DO THIS
-    
-    public Movie addMovie(int accountID, int movieID){
-        boolean childAccount = false;
-        Account a = new Account();
-        a = CustomerService.getAccountByID(accountID);
-        childAccount = Account.isChild();
-        
-        boolean childFriendlyMovie = false;
-        Movie m = getOneMovieInAccount(accountID, movieID);
-        childFriendlyMovie = Movie.isChildFriendly();
-        
-        if (childAccount == true && childFriendlyMovie == false){
-            m = null;
-        }
-        else {
-            Movie.setWatched(false);
-            List<Movie> movieList = a.getMovieList();
-            movieList.add(m);
-        }
-        return m;
-        //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
-    } 
-    
-//BH:  ARE WE  GIVING ACCOUNTS UNIQUE IDS? 
-    //DW: Yes, we are taking an array that stores all accounts in app and adding one to create ID
-//BH: DO METHODs INVOLVING ACCOUNTS ALSO NEED TO TAKE IN CUSTID TO GO PATH CUSTOMER:ACCOUNT:MOVIE. 
-//This is best practice and was discussed with Noel but we can not do. Do you think this will be possible?
-    //DW: Working on it
-//BH: the resource is currently only passing accountID and movieID but can be easily changed back
-    
-    public String removeMovie(int accountID, int movieID){
-        Movie m = getOneMovieInAccount(accountID, movieID);
-        Account a = CustomerService.getAccountByID(accountID);
-        List<Movie> movieList = a.getMovieList();
-        movieList.remove(movieID);
-        return "Movie successfully added";
-        //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
-    }
-    
-// BH: THIS NEEDS TO BE LINKED TO A CUSTOMER, AS ABOVE   
-    public ArrayList<Movie> getMoviesInAccount(int accountID){
-        Account a = new Account();
-        ArrayList<Movie> movieList = a.getMovieList();
-        return movieList;
-    }
-    
-    
-    public Movie getOneMovieInAccount(int accountID, int movieID){
-        Movie found = null;
-        Account a = new Account();
-        List<Movie> movieList = a.getMovieList();
-        for (Movie m : movieList) {
-            if (m.getMovieID() == movieID) {
-                found = m;
-            } 
-        }
-        return found;
-    }
-    
-    public String transferMovie(int fromAccountID, int movieID, Account a){
-        removeMovie(fromAccountID, movieID);
-        //should have response if movie not on account, 404 resource not found. 
-        addMovie(a.getAccountID(), movieID);
-        return "Code 200 - transferred successfully";
-        //needs error msg 404 resource not found
-        //Response: Code 200 / 404 ‘Movie successfully removed’
-    }
 
     //EXAMPLE OF FILTERING
     /*public List<Message> getSearchMessages(String message, String author) {
