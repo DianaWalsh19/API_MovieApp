@@ -42,8 +42,7 @@ public class AccountService {
         Set<Map.Entry<Integer, Account>> entries = allAccounts.entrySet();
     }
 
-    public ArrayList<Account> getAllAccounts(int custID){      
-        
+    public ArrayList<Account> getCustomerAccounts(int custID){
         ArrayList<Account> listOfCustomerAccounts = new ArrayList<>();
         Customer c = new Customer();
         ArrayList<Account> allAccountsList = new ArrayList<>(allAccounts.values());
@@ -60,33 +59,11 @@ public class AccountService {
         }return listOfCustomerAccounts;
     }
     
-    // DW: This one works, the ID is correctly mapped, but in the response for some reason the Account ID still shows as 0
     public Account getAccountByID(int custID, int accountID){
-        Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
-        return customerAccounts.get(accountID);
+        ArrayList<Account> listOfCustomerAccounts = getCustomerAccounts(custID);
+        return listOfCustomerAccounts.get(accountID-1);
     }
-    /*
-    public List<Account> getCustomerAccounts(int customID){
-        Map<Integer, Account> customerAccounts = Customer.getCustomerAccounts(customID);
-        return new ArrayList<>(customerAccounts.values());
-        customerAccounts = null;
-        for(int i = 0; i < allAccounts.size(); i++) {
-                System.out.println(allAccounts.get(i).getUserName());
-            }
-        try{
-            for (Account a : allAccounts.values() ){
-                if (a.getCustomID() == customID) {
-                    customerAccounts.add(a);
-                    return customerAccounts;
-                } 
-            }
-        }catch(NullPointerException e){
-        System.out.println("Customer list throwing NullPointerException");
-        }
-        return customerAccounts;
-    }
-    */
-
+    
     public Account addAccount(int custID, Account a){
         Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
         a.setAccountID(customerAccounts.size()+1);
@@ -106,9 +83,11 @@ public class AccountService {
     }
 
     public Account removeAccount(int custID, int accountID){
-        Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
-        allAccounts.remove(accountID);
-        return customerAccounts.remove(accountID);
+        ArrayList<Account> listOfCustomerAccounts = getCustomerAccounts(custID);
+        Account a = listOfCustomerAccounts.get(accountID-1);
+        //Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
+        //allAccounts.remove(accountID-1);
+        return listOfCustomerAccounts.remove(accountID-1);
     }
     
     

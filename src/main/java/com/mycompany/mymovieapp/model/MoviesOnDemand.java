@@ -20,7 +20,7 @@ public class MoviesOnDemand {
     public static Map<Integer, Customer> getAllCustomers(){
         return allCustomers;
     }
-
+    
     public static Map<Integer, Account> getAllAccounts(){
         return allAccounts;
     }
@@ -29,7 +29,9 @@ public class MoviesOnDemand {
         return allMovies;
     }
     
-    
+    public void setAllAccounts(Map<Integer, Account> allAccounts){
+       this.allAccounts = allAccounts;
+    }
     
     /*
     private static ArrayList<Customer> allCustomers = allCustomers = new ArrayList<Customer>();;

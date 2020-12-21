@@ -42,7 +42,7 @@ public class AccountResource {
     
     @GET
     public List<Account> getAllAccounts(@PathParam("custID") int custID){
-        return accountService.getAllAccounts(custID);
+        return accountService.getCustomerAccounts(custID);
     }
     
     @POST
