@@ -7,10 +7,7 @@
 package com.mycompany.mymovieapp.service;
 
 
-import com.mycompany.mymovieapp.model.Account;
-import com.mycompany.mymovieapp.model.Customer;
-import com.mycompany.mymovieapp.model.Movie;
-import com.mycompany.mymovieapp.model.MoviesOnDemand;
+import com.mycompany.mymovieapp.model.*;
 import com.mycompany.mymovieapp.service.AccountService;
 import com.mycompany.mymovieapp.service.MovieService;
 import java.util.ArrayList;
@@ -48,18 +45,25 @@ public class MovieService {
         return m;
     }
     
-    public String addMovie(int custID, int accountID, Movie m){
+    public String addMovie(AddMovieObject amo){
+        
         String message;
-        System.out.println("Add movie call");
         boolean childAccount = false;
+        int custID = amo.getCustID();
+        int accountID = amo.getMovieID();
+        int movieID = amo.getMovieID();
+        Movie m = allMovies.get(movieID);
+        
+        System.out.println("Add movie call");//for testing
+        
         Account a = new Account();
         a = as.getAccountByID(custID, accountID);
         childAccount = Account.isChild();
         System.out.println(childAccount);
         
+
         boolean childFriendlyMovie = false;
-        int movieID = m.getMovieID();
-        m = allMovies.get(movieID);
+
         childFriendlyMovie = Movie.isChildFriendly();
         
         if (childAccount == true && childFriendlyMovie == false){
@@ -74,6 +78,33 @@ public class MovieService {
         }
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     } 
+  //add Movie method same as anbove but uses instead of movie object, transfer Movie uses this  
+        public String addMovie(int custID,int accountID,int movieID){
+        String message;
+        System.out.println("Add movie call");
+        boolean childAccount = false;
+            Account a = new Account();
+        a = as.getAccountByID(custID, accountID);
+        childAccount = Account.isChild();
+        System.out.println(childAccount);
+        
+        boolean childFriendlyMovie = false;
+        Movie m = new Movie();
+        m = allMovies.get(movieID);
+        childFriendlyMovie = Movie.isChildFriendly();
+        
+        if (childAccount == true && childFriendlyMovie == false){
+            message = "This is a child account and not child-friendly movies cannot be added";
+            return message;
+        }
+        else {
+            m.setWatched(false);
+            Map<Integer, Movie> accountMovies = a.getMoviesInAccount();
+            accountMovies.put(movieID, m);
+            return "Movie successfullya added";
+        }
+        //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
+    }
     
     public String removeMovie(int custID, int accountID, int movieID){
         Account a = new Account();
@@ -84,15 +115,17 @@ public class MovieService {
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     }
     
-    /*//Proposal for transferMovie
+    //Proposal for transferMovie
     
-    public String transferMovie(int custID, int accountID, int movieID, int newAccountID){
+    public String transferMovie(int custID, int accountID, int movieID, Account a){
         String message;
         Customer c = allCustomers.get(custID);
         Map<Integer, Account> customerAccounts = c.getCustomerAccounts();
         Account from = customerAccounts.get(accountID);
         Map<Integer, Movie> fromAccountMovies = from.getMoviesInAccount();
         
+        int newAccountID = a.getAccountID();
+        a = allAccounts.get(newAccountID);
         Account to = customerAccounts.get(newAccountID);
         Map<Integer, Movie> toAccountMovies = to.getMoviesInAccount();
         
@@ -105,7 +138,7 @@ public class MovieService {
         }
         return message;
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
-    }*/
+    }
     
     /*public String transferMovie(int custID, int fromAccountID, int movieID, Account a){
         removeMovie(fromAccountID, movieID);

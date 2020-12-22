@@ -6,7 +6,7 @@
 
 package com.mycompany.mymovieapp.resources;
 
-import com.mycompany.mymovieapp.model.Movie;
+import com.mycompany.mymovieapp.model.*;
 import com.mycompany.mymovieapp.service.MovieService;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +35,17 @@ public class MovieResource {
         return movieService.getMoviesInAccount(custID, accountID);
     }
     
+    
+//    @POST
+//    public String addMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, Movie m){
+//        return movieService.addMovie(custID, accountID, m);
+//    }
+
     @POST
-    public String addMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, Movie m){
-        return movieService.addMovie(custID, accountID, m);
+    public String addMovieToAccount(AddMovieObject amo){
+        return movieService.addMovie(amo);
     }
+
 
     @GET
     @Path("/{movieID}")
@@ -54,12 +61,12 @@ public class MovieResource {
         return movieService.removeMovie(custID, accountID, movieID);
     }
     
-    /*
+    
     @POST
-    @Path("/{movieID}/transfer/{newAccountID)")
-    public String transferMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, @PathParam("movieID") int movieID, @PathParam("newAccountID") int newAccountID){
-        return movieService.transferMovie(custID, accountID, movieID, newAccountID);
-    }*/
+    @Path("/{movieID}/transfer")
+    public String transferMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, @PathParam("movieID") int movieID, Account a){
+        return movieService.transferMovie(custID, accountID, movieID, a);
+    }
     
     
 //**API 7, EXTRA - watched and recc*********************   

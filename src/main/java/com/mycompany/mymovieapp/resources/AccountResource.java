@@ -74,16 +74,6 @@ public class AccountResource {
         return new MovieResource();
     }
     
-//**API 2********************** 
-//Need Noel’s notes on passing JSON objects, do we make new class within java file?
-//I need an object to pass through to the services class and don’t have appropriate
-// one that will have the three rqd ids. Do I maybe pass 3 diff objects?
-    /*@POST
-    public Movie addMovieToAccount(addMovieObject amo){
-        //Body - movie id  (as JSON fragment}
-        
-        return accountService.addMovie(accountID, movieID);
-    }*/
 
     
     /*
