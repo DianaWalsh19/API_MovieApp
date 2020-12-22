@@ -49,9 +49,9 @@ public class MovieService {
         //System.out.println("Add movie call");//for testing
         
         String message;
-        boolean childAccount = false;
+        boolean childAccount;
         int custID = amo.getCustID();
-        int accountID = amo.getMovieID();
+        int accountID = amo.getAccountID();
         int movieID = amo.getMovieID();
         //System.out.println("Customer ID: "+ custID +" - Account ID: " + accountID + " - movieID: " + movieID);//for testing
         
@@ -63,8 +63,7 @@ public class MovieService {
         //System.out.println(childAccount);
         
 
-        boolean childFriendlyMovie = false;
-
+        boolean childFriendlyMovie;
         childFriendlyMovie = Movie.isChildFriendly();
         
         if (childAccount == true && childFriendlyMovie == false){
