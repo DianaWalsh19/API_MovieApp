@@ -49,22 +49,23 @@ public class MovieService {
         //System.out.println("Add movie call");//for testing
         
         String message;
-        boolean childAccount;
+        //boolean childAccount = false;
+        boolean childFriendlyMovie = false;
         int custID = amo.getCustID();
         int accountID = amo.getAccountID();
+        System.out.println("Account ID: "+accountID);
         int movieID = amo.getMovieID();
         //System.out.println("Customer ID: "+ custID +" - Account ID: " + accountID + " - movieID: " + movieID);//for testing
         
         Movie m = allMovies.get(movieID);
         
-        Account a = new Account();
-        a = as.getAccountByID(custID, accountID);
-        childAccount = Account.isChild();
-        //System.out.println(childAccount);
+        //Account a = new Account();
+        Account a = as.getAccountByID(custID, accountID);
+        boolean childAccount = a.isChild();
+        System.out.println(childAccount);
         
-
-        boolean childFriendlyMovie;
         childFriendlyMovie = Movie.isChildFriendly();
+        System.out.println(childFriendlyMovie);
         
         if (childAccount == true && childFriendlyMovie == false){
             message = "This is a child account and not child-friendly movies cannot be added";
@@ -87,10 +88,10 @@ public class MovieService {
         
         String message;
         System.out.println("Add movie call");
-        boolean childAccount = false;
-            Account a = new Account();
+        //boolean childAccount = false;
+        Account a = new Account();
         a = as.getAccountByID(custID, accountID);
-        childAccount = Account.isChild();
+        boolean childAccount = a.isChild();
         //System.out.println(childAccount);
         
         boolean childFriendlyMovie = false;
@@ -145,7 +146,7 @@ public class MovieService {
        
             boolean childAccount = false;
             a = as.getAccountByID(custID, accountID);
-            childAccount = Account.isChild();
+            childAccount = a.isChild();
             //System.out.println(childAccount);
 
             boolean childFriendlyMovie = false;

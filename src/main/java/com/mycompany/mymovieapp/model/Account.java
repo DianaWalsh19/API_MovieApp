@@ -10,35 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="Account")
-@NamedQueries({
+public class Account {
     
-})
-public class Account implements Serializable {
-    
-    @Id
-    @Column(name = "accountID", unique = true)
     private int accountID;
     private String userName;
     private String password;
-    private static boolean child;
-    @ManyToMany
-    //@JoinTable(name="moviesInAccount", joinColumns=@JoinColumn(name="accountID"), inverseJoinColumns=@JoinColumn(name="movieID"));
+    private boolean child;
+    
     private Map<Integer, Movie> moviesInAccount = new HashMap<>();
-    @ManyToOne
-    @JoinColumn(name="custID")
     private int custID;
     //private List<Movie> moviesInAccount;
 
@@ -66,7 +46,7 @@ public class Account implements Serializable {
         return password;
     }
 
-    public static boolean isChild() {
+    public boolean isChild() {
         return child;
     }
 
@@ -86,8 +66,8 @@ public class Account implements Serializable {
         this.password = password;
     }
 
-    public static void setChild(boolean child) {
-        Account.child = child;
+    public void setChild(boolean child) {
+        this.child = child;
     }
 
     public void setMoviesInAccount(Map<Integer, Movie> moviesInAccount) {
