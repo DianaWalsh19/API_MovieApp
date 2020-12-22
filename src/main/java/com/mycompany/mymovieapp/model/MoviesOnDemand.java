@@ -10,6 +10,7 @@ import java.util.List;
 import com.mycompany.mymovieapp.model.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.Serializable;
 
 public class MoviesOnDemand {
     

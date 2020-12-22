@@ -7,16 +7,25 @@
 package com.mycompany.mymovieapp.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Id;
 
-@XmlRootElement
-public class Movie {
+@Entity
+public class Movie implements Serializable{
+    @Id
     private int movieID;
     private String movieName;
     private int releaseDate;
     private static boolean watched;
     private boolean recommended;
     private String summary;      
-    private static boolean childFriendly; 
+    private static boolean childFriendly;
+    //@ManytoMany(mappedBy = "movie")
+    private Map<Integer, Movie> moviesInAccount = new HashMap<>();
 
     public Movie() {
     }

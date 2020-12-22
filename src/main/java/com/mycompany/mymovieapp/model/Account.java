@@ -10,15 +10,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.Table;
 
-public class Account {
+@Entity
+@Table(name="Account")
+@NamedQueries({
     
+})
+public class Account implements Serializable {
+    
+    @Id
+    @Column(name = "accountID", unique = true)
     private int accountID;
-    //private int custID;
     private String userName;
     private String password;
     private static boolean child;
+    @ManyToMany
+    //@JoinTable(name="moviesInAccount", joinColumns=@JoinColumn(name="accountID"), inverseJoinColumns=@JoinColumn(name="movieID"));
     private Map<Integer, Movie> moviesInAccount = new HashMap<>();
+    @ManyToOne
+    @JoinColumn(name="custID")
+    private int custID;
     //private List<Movie> moviesInAccount;
 
     public Account() {
