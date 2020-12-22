@@ -50,12 +50,62 @@ public class MovieService {
     
     public Movie addMovie(int custID, int accountID, Movie m){
         boolean childAccount = false;
+<<<<<<< Updated upstream
         Account a = new Account();
         a = as.getAccountByID(custID, accountID);
         childAccount = Account.isChild();
+=======
+        int custID = amo.getCustID();
+        int accountID = amo.getAccountID();
+        int movieID = amo.getMovieID();
+        //System.out.println("Customer ID: "+ custID +" - Account ID: " + accountID + " - movieID: " + movieID);//for testing
+        
+        Movie m = allMovies.get(movieID);
+        
+        Account a = new Account();
+        a = as.getAccountByID(custID, accountID);
+        childAccount = Account.isChild();
+       // System.out.println("childAccount" +childAccount);
+>>>>>>> Stashed changes
         
         boolean childFriendlyMovie = false;
+<<<<<<< Updated upstream
         int movieID = m.getMovieID();
+=======
+
+        childFriendlyMovie = Movie.isChildFriendly();
+       // System.out.println("child friendly movie" +childFriendlyMovie);
+        
+        if (childAccount == true && childFriendlyMovie == false){
+            message = "This is a child account and not child-friendly movies cannot be added";
+            System.out.println("We reached the end of the method");//for testing
+            return message;
+        }
+        else {
+            m.setWatched(false);
+            Map<Integer, Movie> accountMovies = a.getMoviesInAccount();
+            accountMovies.put(movieID, m);
+            System.out.println("We reached the end of the method");//for testing
+            return "Movie successfully added";
+        }
+        //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
+    } 
+  //add Movie method same as anbove but uses instead of movie object, transfer Movie uses this  
+    public String addMovieForTransfer(int custID,int accountID,int movieID){
+        
+        System.out.println("We are now calling the addMovieForTransfer Method");
+        
+        String message;
+        System.out.println("Add movie call");
+        boolean childAccount = false;
+            Account a = new Account();
+        a = as.getAccountByID(custID, accountID);
+        childAccount = Account.isChild();
+        //System.out.println(childAccount);
+        
+        boolean childFriendlyMovie = false;
+        Movie m = new Movie();
+>>>>>>> Stashed changes
         m = allMovies.get(movieID);
         childFriendlyMovie = Movie.isChildFriendly();
         
