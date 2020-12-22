@@ -46,20 +46,21 @@ public class MovieService {
     }
     
     public String addMovie(AddMovieObject amo){
+        //System.out.println("Add movie call");//for testing
         
         String message;
         boolean childAccount = false;
         int custID = amo.getCustID();
         int accountID = amo.getMovieID();
         int movieID = amo.getMovieID();
-        Movie m = allMovies.get(movieID);
+        //System.out.println("Customer ID: "+ custID +" - Account ID: " + accountID + " - movieID: " + movieID);//for testing
         
-        System.out.println("Add movie call");//for testing
+        Movie m = allMovies.get(movieID);
         
         Account a = new Account();
         a = as.getAccountByID(custID, accountID);
         childAccount = Account.isChild();
-        System.out.println(childAccount);
+        //System.out.println(childAccount);
         
 
         boolean childFriendlyMovie = false;
@@ -68,25 +69,30 @@ public class MovieService {
         
         if (childAccount == true && childFriendlyMovie == false){
             message = "This is a child account and not child-friendly movies cannot be added";
+            System.out.println("We reached the end of the method");//for testing
             return message;
         }
         else {
             m.setWatched(false);
             Map<Integer, Movie> accountMovies = a.getMoviesInAccount();
             accountMovies.put(movieID, m);
-            return "Movie successfullya added";
+            System.out.println("We reached the end of the method");//for testing
+            return "Movie successfully added";
         }
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     } 
   //add Movie method same as anbove but uses instead of movie object, transfer Movie uses this  
-        public String addMovie(int custID,int accountID,int movieID){
+    public String addMovieForTransfer(int custID,int accountID,int movieID){
+        
+        System.out.println("We are now calling the addMovieForTransfer Method");
+        
         String message;
         System.out.println("Add movie call");
         boolean childAccount = false;
             Account a = new Account();
         a = as.getAccountByID(custID, accountID);
         childAccount = Account.isChild();
-        System.out.println(childAccount);
+        //System.out.println(childAccount);
         
         boolean childFriendlyMovie = false;
         Movie m = new Movie();
@@ -101,7 +107,7 @@ public class MovieService {
             m.setWatched(false);
             Map<Integer, Movie> accountMovies = a.getMoviesInAccount();
             accountMovies.put(movieID, m);
-            return "Movie successfullya added";
+            return "Movie successfully added";
         }
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     }
@@ -118,6 +124,9 @@ public class MovieService {
     //Proposal for transferMovie
     
     public String transferMovie(int custID, int accountID, int movieID, Account a){
+        
+        System.out.println("Transfer movie call");
+        
         String message;
         Customer c = allCustomers.get(custID);
         Map<Integer, Account> customerAccounts = c.getCustomerAccounts();
@@ -125,14 +134,37 @@ public class MovieService {
         Map<Integer, Movie> fromAccountMovies = from.getMoviesInAccount();
         
         int newAccountID = a.getAccountID();
-        a = allAccounts.get(newAccountID);
+        //a = allAccounts.get(newAccountID);
         Account to = customerAccounts.get(newAccountID);
         Map<Integer, Movie> toAccountMovies = to.getMoviesInAccount();
         
         if (fromAccountMovies.containsKey(movieID) == true){
             removeMovie(custID, accountID, movieID);
-            addMovie(custID, newAccountID, movieID);
-            message = "Movie successfully transferred";
+            //addMovieForTransfer(custID, newAccountID, movieID);
+            
+            System.out.println("We are now calling the addMovieForTransfer Method");
+       
+            boolean childAccount = false;
+            a = as.getAccountByID(custID, accountID);
+            childAccount = Account.isChild();
+            //System.out.println(childAccount);
+
+            boolean childFriendlyMovie = false;
+            Movie m = new Movie();
+            m = allMovies.get(movieID);
+            childFriendlyMovie = Movie.isChildFriendly();
+
+            if (childAccount == true && childFriendlyMovie == false){
+                message = "This is a child account and not child-friendly movies cannot be added";
+                return message;
+            }
+            else {
+                m.setWatched(false);
+                Map<Integer, Movie> accountMovies = a.getMoviesInAccount();
+                accountMovies.put(movieID, m);
+                return "Movie successfully added";
+            }
+            
         }else{
             message = "Movie could not be transferred";
         }
