@@ -34,7 +34,7 @@ public class CustomerResource {
      
      
     @GET
-    public List<Customer> getAllCustomers(){
+    public ArrayList<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
     }
 
@@ -43,7 +43,14 @@ public class CustomerResource {
     public Customer getCustomerByID( @PathParam("custID") int custID){
         return customerService.getCustomerByID(custID);
     }
-
+    
+    
+    @Path("/{custID}/accounts")
+    public AccountResource getAccountResource(){
+        return new AccountResource();
+    }
+    
+    /*
     @POST
     public Customer addCustomer(Customer c){
         return customerService.addCustomer(c);
@@ -60,7 +67,7 @@ public class CustomerResource {
     @Path( "/{custID}" )
     public void deleteCustomer( @PathParam("custID") int custID){
         customerService.removeCustomer(custID);
-    }
+    } 
     
     //This is a sub-resource declaration.
     //It tells the system that whenever the path matches the one below ("/{custID}/accounts"),
@@ -70,7 +77,10 @@ public class CustomerResource {
         return new AccountResource();
     }
     
-    /*
+    //*************************************************************
+    
+    
+    
     CustomerService customerService = new CustomerService();
     
     // DW: TEST API TO CHECK IF CUSTOMERS ARRAYLIST IS BEING POPULATED

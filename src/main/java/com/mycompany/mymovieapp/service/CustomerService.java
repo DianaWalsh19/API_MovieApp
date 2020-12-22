@@ -11,27 +11,17 @@ import java.util.Set;
 
 public class CustomerService {
     
-    private Map<Integer, Customer> allCustomers = MoviesOnDemand.getAllCustomers();
-    //private static List<Account> accountList = Customer.getAccounts();
+    MoviesOnDemand mod = new MoviesOnDemand();
+    
+    private Map<Integer, Customer> allCustomers = mod.getAllCustomers();
+    ArrayList<Customer> allCustomersList = new ArrayList<>(allCustomers.values());
 
-    public CustomerService(){
-        //allCustomers.put(1, new Customer("Peter Mark", "123 Crescent View, Dublin", "peter@petermark.com", accountList));
-        //allCustomers.put(2, new Customer("Mary Smith", "123 New Avenue, Waterford", "mary@gmail.com",accountList));
-        //allCustomers.put(3, new Customer("Peter D", "123 Magic Road, Kilkenny", "peter@anotherpeter.com",accountList) );
-        
-        Customer customer1 = new Customer(1, "Peter Mark Cust1", "123 Crescent View, Dublin", "peter@petermark.com");
-        Customer customer2 = new Customer(2, "Mary Smith Cust2", "123 New Avenue, Waterford", "mary@gmail.com");
-        Customer customer3 = new Customer(3, "Peter D Cust3", "123 Magic Road, Kilkenny", "peter@anotherpeter.com");
-        
-        allCustomers.put(customer1.getCustID(), customer1);
-        allCustomers.put(customer2.getCustID(), customer2);
-        allCustomers.put(customer3.getCustID(), customer3);
-        
-        Set<Map.Entry<Integer, Customer>> entries = allCustomers.entrySet();
-    }
-
-    public List<Customer> getAllCustomers(){
-        return new ArrayList<>(allCustomers.values());
+    public ArrayList<Customer> getAllCustomers(){
+        //Testing
+        for (int i = 0; i < allCustomersList.size(); i++){
+            System.out.println(allCustomersList.get(i).getName()+"\n");
+        }
+        return allCustomersList;
     }
 
     public Customer getCustomerByID(int custID){
@@ -39,7 +29,7 @@ public class CustomerService {
     }
 
     public Customer addCustomer(Customer c){
-        c.setcustID(allCustomers.size() + 1 );
+        c.setCustID(allCustomers.size() + 1 );
         allCustomers.put(c.getCustID(), c );
         return c;
     }

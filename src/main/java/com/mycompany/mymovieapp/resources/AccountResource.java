@@ -40,6 +40,7 @@ public class AccountResource {
         //return accountService.getAccountByID(accountID);
     }*/
     
+    
     @GET
     public List<Account> getAllAccounts(@PathParam("custID") int custID){
         return accountService.getCustomerAccounts(custID);
@@ -54,19 +55,24 @@ public class AccountResource {
     @Path("/{accountID}")
     public Account updateAccount(@PathParam("custID") int custID, @PathParam("accountID") int accountID, Account a){
         a.setAccountID(accountID);
-        return accountService.updateAccount(custID, a);
+        return accountService.updateAccount(accountID, a);
     }
     
     @DELETE
     @Path("/{accountID}")
-    public void deleteAccount(@PathParam("custID") int custID, @PathParam("accountID") int accountID){
-        accountService.removeAccount(custID, accountID);
+    public String removeAccount(@PathParam("custID") int custID, @PathParam("accountID") int accountID){
+        return accountService.removeAccount(custID, accountID);
     }
     
     @GET
     @Path("/{accountID}")
     public Account getAccount(@PathParam("custID") int custID, @PathParam("accountID") int accountID){
         return accountService.getAccountByID(custID, accountID);
+    }
+    
+    @Path("/{accountID}/movies")
+    public MovieResource getMovieResource(){
+        return new MovieResource();
     }
     
 //**API 2********************** 

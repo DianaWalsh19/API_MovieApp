@@ -16,36 +16,27 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AccountService {
     
-    private Map<Integer, Customer> allCustomers = MoviesOnDemand.getAllCustomers();
-    private Map<Integer, Account> allAccounts = MoviesOnDemand.getAllAccounts();
+    MoviesOnDemand mod = new MoviesOnDemand();
     
-    public AccountService(){
-        
-        Account account1 = new Account(1, "Father in Account 1", "password Father 1", false, 1);
-        Account account2 = new Account(2, "Mother in Account 1", "password Mother 1", false, 1);
-        Account account3 = new Account(3, "Child in Account 1", "password Child 1", true, 1);
-        Account account4 = new Account(4, "Mother in Account 2", "password Mother 2", false, 2);
-        Account account5 = new Account(5, "Uncle in Account 3", "password Uncle 3", false, 3);
-        Account account6 = new Account(6, "Niece in Account 3", "password Niece 3", true, 3);
-        
-        allAccounts.put(account1.getAccountID()+1, account1);
-        allAccounts.put(account2.getAccountID()+1, account2);
-        allAccounts.put(account3.getAccountID()+1, account3);
-        allAccounts.put(account4.getAccountID()+1, account4);
-        allAccounts.put(account5.getAccountID()+1, account5);
-        allAccounts.put(account6.getAccountID()+1, account6);
-        
-        Set<Map.Entry<Integer, Account>> entries = allAccounts.entrySet();
-    }
-
+    private Map<Integer, Customer> allCustomers = mod.getAllCustomers();
+    ArrayList<Customer> allCustomersList = new ArrayList<>(allCustomers.values());
+    private Map<Integer, Account> allAccounts = mod.getAllAccounts();
+    //ArrayList<Account> allAccountsList = new ArrayList<>(allAccounts.values());
+    
+    
     public ArrayList<Account> getCustomerAccounts(int custID){
-        ArrayList<Account> listOfCustomerAccounts = new ArrayList<>();
-        Customer c = new Customer();
-        ArrayList<Account> allAccountsList = new ArrayList<>(allAccounts.values());
+        Customer c = allCustomers.get(custID);
+        Map<Integer, Account> customerAccounts = c.getCustomerAccounts();
+        Set<Entry<Integer, Account> > entrySet = customerAccounts.entrySet(); 
+        ArrayList<Account> listOfCustomerAccounts = customerAccounts.values().stream().collect( 
+                Collectors.toCollection(ArrayList::new)) ; 
+        /*ArrayList<Account> allAccountsList = new ArrayList<>(allAccounts.values());
         
         try{
             for(int i = 0; i < allAccountsList.size(); i++){
@@ -56,50 +47,44 @@ public class AccountService {
             }
         }catch(NullPointerException e){
         System.out.println("Customer list throwing NullPointerException");
-        }return listOfCustomerAccounts;
+        }*/
+        return listOfCustomerAccounts;
     }
     
     public Account getAccountByID(int custID, int accountID){
-        ArrayList<Account> listOfCustomerAccounts = getCustomerAccounts(custID);
-        ArrayList<Account> allAccountsList = new ArrayList<>(allAccounts.values());
-        Account a = allAccountsList.get(accountID - 1);
-        if(a.getCustID() != custID){
-            a = null;
-        }
+        Customer c = allCustomers.get(custID);
+        Map<Integer, Account> customerAccounts = c.getCustomerAccounts();
+        Account a = customerAccounts.get(accountID);
         return a;
     }
     
     public Account addAccount(int custID, Account a){
-        //Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
+        Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
         a.setAccountID(allAccounts.size()+1);
-        a.setCustID(custID);
-        //customerAccounts.put(a.getAccountID(), a);
-        allAccounts.put(a.getAccountID(), a);
-        /*for(int i =0; i < allAccounts.size(); i++){
-            System.out.println("This is the list of accounts: "+allAccounts.get(i).getAccountID() + "\n" + allAccounts.get(i).getUserName() + "\n");
-        }*/
+        allAccounts.put(allAccounts.size(), a);
+        customerAccounts.put(a.getAccountID(), a);
         return a;        
     }
 
-    public Account updateAccount(int custID, Account a){
+    public String removeAccount(int custID, int accountID){
         Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
-        if (a.getAccountID() < 0){
-            return null;
-        }
-        customerAccounts.put(a.getAccountID(), a);
-        allAccounts.put(a.getAccountID(), a);
-        return a;
-    }
-
-    public Account removeAccount(int custID, int accountID){
-        ArrayList<Account> listOfCustomerAccounts = getCustomerAccounts(custID);
-        Account a = listOfCustomerAccounts.get(accountID-1);
+        customerAccounts.remove(accountID);
         //Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
         //allAccounts.remove(accountID-1);
-        return listOfCustomerAccounts.remove(accountID-1);
+        return "Account succesfully deleted";
     }
     
-    
+    public Account updateAccount(int custID, Account a){
+        int accountID = a.getAccountID();
+        Map<Integer, Account> customerAccounts = allCustomers.get(custID).getCustomerAccounts();
+        customerAccounts.remove(accountID);
+        Account newAcccount = a;
+        a.setAccountID(a.getAccountID());
+        allAccounts.put(accountID, a);
+        customerAccounts.put(accountID, a);
+        return a;   
+    }
+    //*************************************************************************************************
     
     /*
     private ArrayList<Movie> movieList = new ArrayList<Movie>();

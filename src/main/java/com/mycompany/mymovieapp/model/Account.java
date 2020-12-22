@@ -14,26 +14,23 @@ import java.util.Map;
 public class Account {
     
     private int accountID;
-    private int custID;
+    //private int custID;
     private String userName;
     private String password;
-    //private ArrayList<Movie> movieList = new ArrayList<>();
-    private Map<Integer, Movie> moviesInAccount = new HashMap<>();
     private static boolean child;
+    private Map<Integer, Movie> moviesInAccount = new HashMap<>();
+    //private List<Movie> moviesInAccount;
 
     public Account() {
     }
-
-    public Account(int accountID, String userName, String password, boolean child, int custID) {
+    
+    public Account(int accountID, String userName, String password, boolean child, Map<Integer, Movie> moviesInAccount) {
         this.accountID = accountID;
         this.userName = userName;
         this.password = password;
         this.child = child;
-        this.custID = custID;
-    }
-    
-    public int getCustID() {
-        return custID;
+        //this.custID = custID;
+        this.moviesInAccount = moviesInAccount;
     }
 
     public int getAccountID() {
@@ -48,33 +45,16 @@ public class Account {
         return password;
     }
 
-    /*
-    public ArrayList<Movie> getMovieList() {
-        return movieList;
-    
-    public void setMovieList(ArrayList<Movie> movieList) {
-        this.movieList = movieList;
-    }
-    }*/
-    
-    public Map<Integer, Movie> getMoviesInAccount(){
-        return moviesInAccount;
-    }
-
-    public void setMoviesInAccount(Map<Integer, Movie> moviesInAccount){
-        this.moviesInAccount = moviesInAccount;
-    }
-
     public static boolean isChild() {
         return child;
     }
 
+    public Map<Integer, Movie> getMoviesInAccount() {
+        return moviesInAccount;
+    }
+
     public void setAccountID(int accountID) {
         this.accountID = accountID;
-    }
-    
-    public void setCustID(int custID) {
-        this.custID = custID;
     }
 
     public void setUserName(String userName) {
@@ -85,8 +65,12 @@ public class Account {
         this.password = password;
     }
 
-    public void setChild(boolean child) {
-        this.child = child;
+    public static void setChild(boolean child) {
+        Account.child = child;
     }
 
+    public void setMoviesInAccount(Map<Integer, Movie> moviesInAccount) {
+        this.moviesInAccount = moviesInAccount;
+    }
+    
 }

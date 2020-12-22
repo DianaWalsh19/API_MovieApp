@@ -14,78 +14,66 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Customer {
+    
     private int custID;
     private String name;
     private String address;
     private String email;
+    //private List<Account> customerAccounts;
     private Map<Integer, Account> customerAccounts = new HashMap<>();
-    ArrayList<Account> listOfAllAccounts = new ArrayList<>(customerAccounts.values());
+    //ArrayList<Account> listOfAllAccounts = new ArrayList<>(customerAccounts.values());
 
     public Customer(){  
     }
 
-    /*public Customer (String name, String address, String email, List accountList){
-        //this.custID = custID;
-        this.name = name;
-        this.address = address;
-        this.email = email;
-        this.accountList = accountList;
-    }*/
-    
-    public Customer (int custID, String name, String address, String email){
+    public Customer (int custID, String name, String address, String email, Map<Integer, Account> customerAccounts){
         this.custID = custID;
         this.name = name;
         this.address = address;
         this.email = email;
-        //this.accountList = accountList;
+        this.customerAccounts = customerAccounts;
     }
-    
-    public void setcustID(int custID){
-        this.custID = custID;
-    }
-    
-    public int getCustID(){
+
+    public int getCustID() {
         return custID;
     }
-    
-    public void setName(String name){
-        this.name = name;
-    }
-    
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    
-    public void setAddress(String address){
-        this.address = address;
-    }
-    
-    public String getAddress(){
+
+    public String getAddress() {
         return address;
     }
-    
-    public void setEmail(String email){
-        this.email = email;
-    }
-    
-    public String getEmail(){
+
+    public String getEmail() {
         return email;
     }
-    
-    public Map<Integer, Account> getCustomerAccounts(){
+
+    public Map<Integer, Account> getCustomerAccounts() {
         return customerAccounts;
     }
-    
-    public ArrayList<Account> getListCustomerAccounts(){
-        return listOfAllAccounts;
+
+    public void setCustID(int custID) {
+        this.custID = custID;
     }
-    
-    public void setCustomerAccounts(Map<Integer, Account> customerAccounts){
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCustomerAccounts(Map<Integer, Account> customerAccounts) {
         this.customerAccounts = customerAccounts;
     }
     
-    public void setListCustomerAccounts(ArrayList<Account> listOfCustomerAccounts){
-        this.listOfAllAccounts = listOfAllAccounts;
-    }
+    
 }
 
