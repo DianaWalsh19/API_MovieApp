@@ -36,7 +36,7 @@ public class MovieResource {
     }
     
     @POST
-    public Movie addMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, Movie m){
+    public String addMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, Movie m){
         return movieService.addMovie(custID, accountID, m);
     }
 

@@ -54,7 +54,6 @@ public class AccountResource {
     @PUT
     @Path("/{accountID}")
     public Account updateAccount(@PathParam("custID") int custID, @PathParam("accountID") int accountID, Account a){
-        a.setAccountID(accountID);
         return accountService.updateAccount(accountID, a);
     }
     

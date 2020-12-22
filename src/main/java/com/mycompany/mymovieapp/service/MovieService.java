@@ -48,11 +48,14 @@ public class MovieService {
         return m;
     }
     
-    public Movie addMovie(int custID, int accountID, Movie m){
+    public String addMovie(int custID, int accountID, Movie m){
+        String message;
+        System.out.println("Add movie call");
         boolean childAccount = false;
         Account a = new Account();
         a = as.getAccountByID(custID, accountID);
         childAccount = Account.isChild();
+        System.out.println(childAccount);
         
         boolean childFriendlyMovie = false;
         int movieID = m.getMovieID();
@@ -60,14 +63,15 @@ public class MovieService {
         childFriendlyMovie = Movie.isChildFriendly();
         
         if (childAccount == true && childFriendlyMovie == false){
-            m = null;
+            message = "This is a child account and not child-friendly movies cannot be added";
+            return message;
         }
         else {
             m.setWatched(false);
             Map<Integer, Movie> accountMovies = a.getMoviesInAccount();
             accountMovies.put(movieID, m);
+            return "Movie successfullya added";
         }
-        return m;
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     } 
     
