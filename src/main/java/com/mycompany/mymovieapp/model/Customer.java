@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package com.mycompany.mymovieapp.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -40,11 +34,10 @@ public class Customer implements Serializable{
     private String name;
     private String address;
     private String email;
-    //private List<Account> customerAccounts;
+
     @ElementCollection
     @OneToMany (mappedBy = "CUSTOMER")
     private Map<Integer, Account> customerAccounts = new HashMap<>();
-    //ArrayList<Account> listOfAllAccounts = new ArrayList<>(customerAccounts.values());
 
     public Customer(){  
     }
@@ -97,8 +90,13 @@ public class Customer implements Serializable{
         this.customerAccounts = customerAccounts;
     }
     
+    @Override
     public String toString(){
         return "Customer{"+"custID: "+custID+ ", name: "+name+" email: "+email+"}";
+    }
+
+    public void setcustID(int custID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

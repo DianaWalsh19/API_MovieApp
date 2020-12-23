@@ -1,21 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.mycompany.mymovieapp.service;
 
 
 import com.mycompany.mymovieapp.model.Account;
 import com.mycompany.mymovieapp.model.Customer;
-import com.mycompany.mymovieapp.model.Movie;
 import com.mycompany.mymovieapp.model.MoviesOnDemand;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -29,8 +19,7 @@ public class AccountService {
     ArrayList<Customer> allCustomersList = new ArrayList<>(allCustomers.values());
     private Map<Integer, Account> allAccounts = mod.getAllAccounts();
     //ArrayList<Account> allAccountsList = new ArrayList<>(allAccounts.values());
-    
-    
+     
     public ArrayList<Account> getCustomerAccounts(int custID){
         Customer c = allCustomers.get(custID);
         Map<Integer, Account> customerAccounts = c.getCustomerAccounts();
@@ -85,22 +74,4 @@ public class AccountService {
         customerAccounts.put(accountID, a);
         return a;   
     }
-    //*************************************************************************************************
-    
-    /*
-    private ArrayList<Movie> movieList = new ArrayList<Movie>();
-
-    //EXAMPLE OF FILTERING
-    /*public List<Message> getSearchMessages(String message, String author) {
-        List<Message> matcheslist = new ArrayList<>();
-        
-        for (Message q: getAllMessages()) {
-            if ((message == null || q.getMessage().equals(message)) 
-                   && (author == null || q.getAuthor().equals(author))) {
-               matcheslist.add(q);
-            }
-        }
-        return matcheslist;
-
-    */
 }

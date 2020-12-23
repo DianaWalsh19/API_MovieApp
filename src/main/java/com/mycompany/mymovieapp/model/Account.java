@@ -19,8 +19,6 @@ public class Account {
     private boolean child;
     
     private Map<Integer, Movie> moviesInAccount = new HashMap<>();
-    private int custID;
-    //private List<Movie> moviesInAccount;
 
     public Account() {
     }
@@ -30,7 +28,6 @@ public class Account {
         this.userName = userName;
         this.password = password;
         this.child = child;
-        //this.custID = custID;
         this.moviesInAccount = moviesInAccount;
     }
 
@@ -72,6 +69,11 @@ public class Account {
 
     public void setMoviesInAccount(Map<Integer, Movie> moviesInAccount) {
         this.moviesInAccount = moviesInAccount;
+    }
+    
+    @Override
+    public String toString(){
+        return "\nAccount: \n {"+"accountID: "+accountID+ ",\n name: "+userName+"\n password: "+password+"}";
     }
     
 }

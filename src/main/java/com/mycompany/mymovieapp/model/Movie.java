@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package com.mycompany.mymovieapp.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.Id;
 
 @Entity
@@ -44,7 +37,7 @@ public class Movie implements Serializable{
         return movieID;
     }
 
-    public String getMovieName() {
+    public String getMovieName(int movieID) {
         return movieName;
     }
 
@@ -95,5 +88,11 @@ public class Movie implements Serializable{
     public void setChildFriendly(boolean childFriendly) {
         this.childFriendly = childFriendly;
     } 
+    
+    @Override
+    public String toString(){
+        return "\n{ID: " +movieID+ "\nName: " + movieName +"\nRelease Date: "+releaseDate + "\nSummary: " +summary + "\nWatched: " +watched + "\nRecommended: " +recommended +"}";
+ 
+    }
     
 }

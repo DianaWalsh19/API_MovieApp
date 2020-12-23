@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.mymovieapp.service;
 
-import com.mycompany.mymovieapp.model.Account;
-import com.mycompany.mymovieapp.model.AddMovieObject;
-import com.mycompany.mymovieapp.model.Customer;
-import com.mycompany.mymovieapp.model.Movie;
-import com.mycompany.mymovieapp.model.MoviesOnDemand;
-import static com.mycompany.mymovieapp.model.MoviesOnDemand.allMovies;
+import com.mycompany.mymovieapp.model.*;
 import java.util.ArrayList;
 import java.util.Map;
-import static org.eclipse.persistence.expressions.ExpressionOperator.as;
 
 /**
  *
@@ -30,7 +20,7 @@ public class AddMovieObjectService {
     ArrayList<Movie> allMoviesList = new ArrayList<>(allMovies.values());
     AccountService as = new AccountService();
         
-        public String addMovie(AddMovieObject amo){
+        public Account addMovie(AddMovieObject amo){
         //System.out.println("Add movie call");//for testing
         
         String message;
@@ -53,9 +43,10 @@ public class AddMovieObjectService {
         System.out.println(childFriendlyMovie);
         
         if (childAccount == true && childFriendlyMovie == false){
+            a = null;
             message = "This is a child account and not child-friendly movies cannot be added";
             System.out.println("We reached the end of the method");//for testing
-            return message;
+            return a;
         }
         else {
             m.setWatched(false);
@@ -63,7 +54,7 @@ public class AddMovieObjectService {
             accountMovies.put(movieID, m);
             
             System.out.println("We reached the end of the method");//for testing
-            return "Movie successfully added";
+            return a;
         }
         //System.out.println("201 - new resource created: /messages/" + String.valueOf(m.getId()));
     } 
