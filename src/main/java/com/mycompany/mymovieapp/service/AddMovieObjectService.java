@@ -5,10 +5,6 @@ import com.mycompany.mymovieapp.model.*;
 import java.util.ArrayList;
 import java.util.Map;
 
-/**
- *
- * @author Bebhin
- */
 public class AddMovieObjectService {
     
     MoviesOnDemand mod = new MoviesOnDemand();

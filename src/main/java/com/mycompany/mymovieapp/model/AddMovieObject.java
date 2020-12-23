@@ -1,10 +1,6 @@
 
 package com.mycompany.mymovieapp.model;
 
-/**
- *
- * @author Bebhin
- */
 public class AddMovieObject {
     
     int custID;

@@ -1,15 +1,11 @@
 
 package com.mycompany.mymovieapp.model;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
-@Entity
-public class Movie implements Serializable{
-    @Id
+public class Movie {
+    
     private int movieID;
     private String movieName;
     private int releaseDate;
@@ -17,7 +13,6 @@ public class Movie implements Serializable{
     private boolean recommended;
     private String summary;      
     private static boolean childFriendly;
-    //@ManytoMany(mappedBy = "movie")
     private Map<Integer, Movie> moviesInAccount = new HashMap<>();
 
     public Movie() {

@@ -5,38 +5,14 @@ package com.mycompany.mymovieapp.model;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-@XmlRootElement
-@Entity
-@Table(name="Customer")
-@NamedQueries({
-    @NamedQuery(name = "Customer.findByCustID",
-            query = "SELECT c FROM c WHERE c.custID = :custID"),
-    @NamedQuery(name = "Customer.findAll",
-            query = "SELECT c FROM Customer c")
-})
-public class Customer implements Serializable{
+public class Customer {
     
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @Column(name = "custID", unique = true)
     private int custID;
     private String name;
     private String address;
     private String email;
 
-    @ElementCollection
-    @OneToMany (mappedBy = "CUSTOMER")
     private Map<Integer, Account> customerAccounts = new HashMap<>();
 
     public Customer(){  
