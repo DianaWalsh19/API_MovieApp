@@ -20,7 +20,7 @@ public class Movie implements Serializable{
     private int movieID;
     private String movieName;
     private int releaseDate;
-    private static boolean watched;
+    private boolean watched;
     private boolean recommended;
     private String summary;      
     private static boolean childFriendly;
@@ -80,8 +80,8 @@ public class Movie implements Serializable{
         this.releaseDate = releaseDate;
     }
 
-    public static void setWatched(boolean watched) {
-        Movie.watched = watched;
+    public void setWatched(boolean watched) {
+        this.watched = watched;
     }
 
     public void setRecommended(boolean recommended) {

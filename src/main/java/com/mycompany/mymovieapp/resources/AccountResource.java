@@ -39,6 +39,11 @@ public class AccountResource {
         return "Method to return Customer ID "+ custID + " for account " + accountID;
         //return accountService.getAccountByID(accountID);
     }*/
+//**** API 1 ADD ACCOUNT ********************************
+    @POST
+    public Account addAccount(@PathParam("custID") int custID, Account a){
+        return accountService.addAccount(custID, a);
+    }
     
     
     @GET
@@ -46,10 +51,7 @@ public class AccountResource {
         return accountService.getCustomerAccounts(custID);
     }
     
-    @POST
-    public Account addAccount(@PathParam("custID") int custID, Account a){
-        return accountService.addAccount(custID, a);
-    }
+
     
     @PUT
     @Path("/{accountID}")

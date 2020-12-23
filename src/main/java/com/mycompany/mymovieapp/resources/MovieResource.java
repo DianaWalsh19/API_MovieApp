@@ -8,61 +8,45 @@ package com.mycompany.mymovieapp.resources;
 
 import com.mycompany.mymovieapp.model.*;
 import com.mycompany.mymovieapp.service.MovieService;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 
 @Path ("/")
 @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+//Keeping produces in causes a ModelValidationException "ambiguous (sub-)resource method
 //@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 public class MovieResource {
     
     MovieService movieService = new MovieService();
     
-    
-    //**API 5: List Movies *********
-    
-    @GET
-    public List<Movie> getMoviesInAccount(@PathParam("custID") int custID, @PathParam("accountID") int accountID){
-        return movieService.getMoviesInAccount(custID, accountID);
-    }
-    
-    
-//    @POST
-//    public String addMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, Movie m){
-//        return movieService.addMovie(custID, accountID, m);
-//    }
-
-    @POST
-    public String addMovieToAccount(AddMovieObject amo){
-        return movieService.addMovie(amo);
-    }
-
-
-    @GET
-    @Path("/{movieID}")
-    public Movie getMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, @PathParam("movieID") int movieID){
-        return movieService.getOneMovieInAccount(custID, accountID, movieID);
-    }
-    
-    //**API 4: Remove a movie *********
+//******* API 3: REMOVE MOVIE **************************************************
     
     @DELETE
     @Path("/{movieID}")
     public String removeMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, @PathParam("movieID") int movieID){
         return movieService.removeMovie(custID, accountID, movieID);
     }
+      
+//******** API 4: LIST MOVIES IN ACCOUNT ***************************************
+    @GET
+    public List<Movie> listMovies(@PathParam("custID") int custID, @PathParam("accountID") int accountID){
+        return movieService.getMoviesInAccount(custID, accountID);
+    }
+
+//********* API 5: SHOW ONE MOVIE **********************************************
+    @GET
+    @Path("/{movieID}")
+    public Movie showOneMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, @PathParam("movieID") int movieID){
+        return movieService.getOneMovieInAccount(custID, accountID, movieID);
+    }
     
-    
+//********* API 6: TRANSFER MOVIE **********************************************   
     @PUT
     @Path("/{movieID}/transfer")
     public String transferMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, @PathParam("movieID") int movieID, Account a){
@@ -70,6 +54,15 @@ public class MovieResource {
     }
     
     
+//    @POST
+//    public String addMovie(@PathParam("custID") int custID, @PathParam("accountID") int accountID, Movie m){
+//        return movieService.addMovie(custID, accountID, m);
+//    }
+//
+//    @POST
+//    public String addMovieToAccount(AddMovieObject amo){
+//        return movieService.addMovie(amo);
+//    }   
 //**API 7, EXTRA - watched and recc*********************   
 //    @GET
 //    // display watched Movies
